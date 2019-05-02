@@ -1,4 +1,4 @@
-class StudentRecord{
+class ExpenseList{
     /* constructor - take in params for the student and save them,
         create storage for student dom elements
         store the deletion callback from the model
@@ -20,19 +20,17 @@ class StudentRecord{
     will not be built out.
     Please make sure you understand what is going on and could recreate it via notes rather than direct copying!
     */
-    constructor(id, name, course, grade, deleteCallback=()=>{}){
+    constructor(id, date, type, vendor, city, state, amount, currency, paymentMethod, comment, deleteCallback=()=>{}){
         this.data = {
-            id: id,
-            name: name,
-            course: course,
-            grade: parseInt(grade)
+            id, date, type, vendor, city, state, amount: parseFloat(amount).toFixed(2), currency, paymentMethod, comment
         };
         this.deleteCallback = deleteCallback;
         this.domElements = {
             row: null,
-            name: null,
-            course: null,
-            grade: null,
+            date: null,
+            type: null,
+            amount: null,
+            comment: null,
             operations: null,
             deleteButton: null
         };
@@ -53,7 +51,7 @@ class StudentRecord{
     */
     update(field, value){
 
-        if(field === 'id' || field === 'name' || field === 'course' || field === 'grade'){
+        if(field === 'id' || field === 'date' || field === 'type' || field === 'amount' || field === 'comment'){
             this.data[field]= value;
             $(this.domElements[field]).text(value);
             return true;
@@ -87,29 +85,37 @@ class StudentRecord{
         create the TR and 4 TDs,
         put the 4 TDs inside the TR.
         Add the button to the operation TD
-        add the StudentRecord's handleDelete method to the delete button's click handler
+        add the ExpenseList's handleDelete method to the delete button's click handler
         store all these values for eventual change
         return the TR
     params: none
     return: (jquery dom element) the row that contains the student dom elements
     */
     render() {
-        var row = $('<tr>').css('border-bottom', '1px solid #5e5e5e');
-        var nameColumn = $('<td>').text(this.data.name);
-        var courseColumn = $('<td>').text(this.data.course);
-        var gradeColumn = $('<td>').text(this.data.grade);
+        var row = $('<tr>');
+        var dateColumn = $('<td>').text(this.data.date);
+        var typeColumn = $('<td>');
+        var topType = $('<span>').text(this.data.type).addClass('topCell');
+        var bottomType = $('<span>').text(`${this.data.vendor}, ${this.data.city}, ${this.data.state}`).addClass('bottomCell');
+        typeColumn.append(topType, bottomType);
+        var amountColumn = $('<td>');
+        var topAmount = $('<span>').text(this.data.amount).addClass('topCell');
+        var bottomAmount = $('<span>').text(this.data.currency).addClass('bottomCell');
+        amountColumn.append(topAmount,bottomAmount);
+        var commentColumn = $('<td>').text(this.data.comment);
         var operationColumn = $('<td>');
         var deleteButton = $('<button>').text('delete').css('background-color', 'red');
 
         this.domElements.row = row;
-        this.domElements.name = nameColumn;
-        this.domElements.course = courseColumn;
-        this.domElements.grade = gradeColumn;
+        this.domElements.date = dateColumn;
+        this.domElements.type = typeColumn;
+        this.domElements.amount = amountColumn;
+        this.domElements.comment = commentColumn;
         this.domElements.operations = operationColumn;
         this.domElements.deleteButton = deleteButton;
 
         operationColumn.append(deleteButton);
-        row.append(nameColumn, courseColumn, gradeColumn, operationColumn);
+        row.append(dateColumn, typeColumn, amountColumn, commentColumn, operationColumn);
 
         deleteButton.click(this.handleDelete);
         return row;

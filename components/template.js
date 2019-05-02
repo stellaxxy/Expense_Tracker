@@ -30,18 +30,30 @@ class SGT_template{
     return: undefined
     */
     clearInputs(){
-        this.elementConfig.nameInput.val('');
-        this.elementConfig.courseInput.val('');
-        this.elementConfig.gradeInput.val('');
+        this.elementConfig.typeInput.val('');
+        this.elementConfig.dateInput.val('');
+        this.elementConfig.vendorInput.val('');
+        this.elementConfig.cityInput.val('');
+        this.elementConfig.stateInput.val('');
+        this.elementConfig.amountInput.val('');
+        this.elementConfig.currencyInput.val('USD');
+        this.elementConfig.paymentMethodInput.val('');
+        this.elementConfig.commentInput.val('');
     }
     /* handleCancel - function to handle the cancel button press
     params: none
     return: undefined
     */
     handleCancel(){
-        this.elementConfig.nameInput.val('');
-        this.elementConfig.courseInput.val('');
-        this.elementConfig.gradeInput.val('');
+        this.elementConfig.typeInput.val('');
+        this.elementConfig.dateInput.val('');
+        this.elementConfig.vendorInput.val('');
+        this.elementConfig.cityInput.val('');
+        this.elementConfig.stateInput.val('');
+        this.elementConfig.amountInput.val('');
+        this.elementConfig.currencyInput.val('USD');
+        this.elementConfig.paymentMethodInput.val('');
+        this.elementConfig.commentInput.val('');
     }
     /* handleAdd - function to handle the add button click
     purpose: grabs values from inputs, utilizes the model's add method to save them, then clears the inputs and displays all students
@@ -50,16 +62,36 @@ class SGT_template{
     */
     handleAdd(){
 
-        var name = this.elementConfig.nameInput.val();
-        var course = this.elementConfig.courseInput.val();
-        var grade = this.elementConfig.gradeInput.val();
+        let type = this.elementConfig.typeInput.val();
+        type = type.toUpperCase();
+        const date = this.elementConfig.dateInput.val();
+        const vendor = this.elementConfig.vendorInput.val();
+        const vendorArr = vendor.split(' ');
+        const capitalizedVendorArr = vendorArr.map(item => {
+           return item.charAt(0).toUpperCase() + item.slice(1);
+        });
+        const capitalizedVendor = capitalizedVendorArr.join(' ');
+
+        const city = this.elementConfig.cityInput.val();
+        const cityArr = city.split(' ');
+        const capitalizedCityArr = cityArr.map(item => {
+            return item.charAt(0).toUpperCase() + item.slice(1);
+        });
+        const capitalizedCity = capitalizedCityArr.join(' ');
+
+        const state = this.elementConfig.stateInput.val();
+        let amount = this.elementConfig.amountInput.val();
+
+        const currency = this.elementConfig.currencyInput.val();
+        const paymentMethod = this.elementConfig.paymentMethodInput.val();
+        const comment = this.elementConfig.commentInput.val();
         var id = null;
+
         $('.errorMessage').show();
         $.ajax({
-            //url: 'http://s-apis.learningfuze.com/sgt/create',
-            url: 'http://localhost/SGT/server/createstudent.php',
+            url: 'http://localhost/expense_tracker/server/createExpense.php',
             method: 'POST',
-            data: {api_key: 'iRGOfKr2Z2', name: name, course: course, grade: grade},
+            data: {type, date, vendor: capitalizedVendor, city: capitalizedCity, state, amount, currency, paymentMethod, comment},
             dataType: 'json',
             success: (function(response){
 
@@ -70,13 +102,12 @@ class SGT_template{
                     $('.errorMessage').show();
                 }
                 id = response.new_id;
-                this.model.add(name, course, grade, id);
+                this.model.add(id, date, type, capitalizedVendor, capitalizedCity, state, amount, currency, paymentMethod, comment);
                 this.clearInputs();
                 this.displayAllStudents();
 
             }).bind(this)
         });
-
     }
     /* displayAllStudents - iterate through all students in the model
     purpose:
@@ -95,14 +126,5 @@ class SGT_template{
             var studentRow = allStudents[index].render();
             this.elementConfig.displayArea.append(studentRow);
         }
-        this.displayAverage();
-    }
-    /* displayAverage - get the grade average and display it
-    purpose: grab the average grade from the model, and show it on the dom
-    params: none
-    return: undefined */
-    displayAverage(){
-        var averageGrade = this.model.calculateGradeAverage();
-        this.elementConfig.averageArea.text(averageGrade);
     }
 }

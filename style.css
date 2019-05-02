@@ -22,14 +22,15 @@
 .page-header {
     height: 10vh;
 }
-.student-add-form {
+.expense-add-form {
     position: absolute;
     right: 0;
+    top: 80px;
     font-family: arial, helvetica, sans-serif;
-    width: 30%;
+    width: 27%;
 }
 
-.bottomStudentDiv {
+.bottomExpenseDiv {
     height: 90vh;
 }
 
@@ -38,23 +39,10 @@
 }
 
 .bottomTable {
-    width: 70%;
+    width: 68%;
     position: relative;
     top: 3%;
     border-collapse: collapse;
-}
-
-.avgGrade {
-    background-color: #555555;
-    color: white;
-    font-weight: 400;
-    width: 14%;
-    height: 100%;
-    text-align: center;
-    display: inline-block;
-    font-size: 85%;
-    padding-top: 1%;
-    padding-bottom: 1%;
 }
 
 #displayArea td {
@@ -68,23 +56,19 @@
     height: 5vh;
 }
 
-.form-span {
-    width: 10%;
-    background-color: #cccccc;
-    text-align: center;
-    border-radius: 4px;
-}
-
-.form-span i {
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
+.form-element label {
+    #width: 83px;
 }
 
 .form-input {
-    width: 90%;
+    width: 100%;
     border-radius: 4px;
 }
+
+.labelDiv {
+    flex: 0 0 83px;
+}
+
 
 .add {
     color: white;
@@ -148,12 +132,19 @@ td > button {
 
 th,
 td {
-    border-bottom: 2px solid #9E9E9E;
+    border-bottom: 0.5px solid #cccccc;
     padding-top: 1%;
     padding-bottom: 1%;
 
 }
 
+.topCell {
+    display: block;
+}
+
+.bottomCell{
+    font-size: 80%;
+}
 
 @media (max-width: 768px) {
     body > * {
@@ -195,7 +186,7 @@ td {
         color: #5e5e5e;
     }
 
-    .student-add-form {
+    .expense-add-form {
         width: 100%;
         padding-left: 15px;
         padding-right: 15px;
@@ -220,20 +211,7 @@ td {
         display: inline-block;
     }
 
-    .form-span {
-        padding: 6px 8px;
-        #font-size: 14px;
-        font-weight: 400;
-        border: 1px solid #cccccc;
-        #border-radius: 4px;
-        background-color: #eeeeee;
-        color: #555555;
-        display: inline-block;
-        text-align: center;
-        width: 10%;
-    }
-
-    .bottomStudentDiv {
+    .bottomExpenseDiv {
         height: 52%;
         overflow-y: scroll;
         text-align: center;

@@ -33,23 +33,23 @@ class Model{
         (number) grade: the student's grade
     return: (number) the current number of students in the list
     */
-    add(name, course, grade, id){
+    add(id, date, type, vendor, city, state, amount, currency, paymentMethod, comment){
         //var id = this.getNextID();
-        var studentObject = new StudentRecord(id, name, course, grade, this.remove);
-        this.dataArray.push(studentObject);
+        var expenseObject = new ExpenseList(id, date, type, vendor, city, state, amount, currency, paymentMethod, comment, this.remove);
+        this.dataArray.push(expenseObject);
 
         return this.dataArray.length;
 
     }
     /* remove - called from the student object when the student is removing itself, so the model can also remove it from the list
     purpose - finds the given student in the model's list, and removes it
-    params: (StudentRecord object) the student to remove
+    params: (ExpenseList object) the student to remove
     return: (boolean) true if the student was removed, false if not
     */
-    remove(student){
+    remove(expense){
         var indexToDelete = null;
         for(var index = 0; index < this.dataArray.length; index++){
-            if(this.dataArray[index] === student){
+            if(this.dataArray[index] === expense){
                 indexToDelete = index;
                 break;
             }
@@ -59,11 +59,11 @@ class Model{
         }
         $('.errorMessage').show();
         this.dataArray.splice(indexToDelete, 1);
+        console.log('expense id:', expense);
         $.ajax({
-            //url: 'http://s-apis.learningfuze.com/sgt/delete',
-            url: 'http://localhost/SGT/server/deletestudents.php',
+            url: 'http://localhost/expense_tracker/server/deleteExpense.php',
             method: 'POST',
-            data: {api_key: 'iRGOfKr2Z2', student_id: student.data.id},
+            data: {expense_id: expense.data.id},
             dataType: 'json',
             success: function(response){
                 $('.errorMessage').hide();
@@ -71,10 +71,13 @@ class Model{
                     $('.loadingButton').hide();
                     $('.errorText').text(response.errors);
                     $('.errorMessage').show();
+                    console.log('1');
                     return false;
                 }
+
             }
         });
+        console.log('2');
         return true;
     }
     /* getAllStudents - get the entire list of students and return it
@@ -93,7 +96,7 @@ class Model{
     params:
         (string) field - the property of the student to look through (for example, name, or course, or grade)
         (multiple) value - the value to search for, for example 'Jack' or 5
-    return: (StudentRecord) student if found, (Number) -1 if not found
+    return: (ExpenseList) student if found, (Number) -1 if not found
     */
     getStudentByField( field, value ){
 
@@ -134,20 +137,25 @@ class Model{
         //var self = this;
         $.ajax({
             //url: 'http://s-apis.learningfuze.com/sgt/get',
-            url: 'http://localhost/SGT/server/getstudents.php',
+            url: 'http://localhost/expense_tracker/server/getAllExpenses.php',
             method: 'POST',
-            data: {api_key: 'iRGOfKr2Z2'},
             dataType: 'json',
             success: (function (response) {
 
                 for (var index = 0; index < response.data.length; index++) {
-                    var name = response.data[index].name;
-                    var grade = response.data[index].grade;
-                    var course = response.data[index].course;
+                    var date = response.data[index].date;
+                    var type = response.data[index].type;
+                    var vendor = response.data[index].vendor;
                     var id = response.data[index].id;
+                    var city = response.data[index].city;
+                    var state = response.data[index].state;
+                    var amount = response.data[index].amount;
+                    var currency = response.data[index].currency;
+                    var paymentMethod = response.data[index].paymentMethod;
+                    var comment = response.data[index].comment;
 
 
-                    this.add(name, course, grade, id); //self.add()
+                    this.add(id, date, type, vendor, city, state, amount, currency, paymentMethod, comment); //self.add()
                 }
 
                 callThisFunctionAfterWeGetData()
