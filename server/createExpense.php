@@ -15,8 +15,6 @@ if(strlen($_POST['type']) === 0){
 }
 if(!is_numeric($_POST['amount'])){
     $output['error'][] = 'Amount must be a number';
-} else {
-    $_POST['amount'] = floatval($_POST['amount']);
 }
 
 if(!empty($output['error'])){

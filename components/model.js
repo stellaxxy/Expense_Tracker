@@ -4,22 +4,16 @@ class Model{
     return: undefined (don't return undefined, that will screw it up)
     notes: store your records in an array that is a property of this object
     */
-    constructor(){
+    constructor(displayExpense=()=>{}){
         this.dataArray = [];
         this.id = 0;
+        this.displayExpenses = displayExpense;
+
         this.remove = this.remove.bind(this);
         this.handleGetData = this.handleGetData.bind(this);
-
-    }
-    /* getNextID - for version .1-.5, returns the next available ID
-    purpose: takes an id property from the constructor, adds one, and returns it
-    params: none
-    return: (number) the next id
-    */
-    getNextID(){
-        this.id += 1;
-
-        return this.id;
+        this.handleDelete = this.handleDelete.bind(this);
+        this.handleUpdateClick = this.handleUpdateClick.bind(this);
+        this.handleSearchClick = this.handleSearchClick.bind(this);
     }
     /* add - add a student to the model
     purpose:
@@ -35,35 +29,59 @@ class Model{
     */
     add(id, date, type, vendor, city, state, amount, currency, paymentMethod, comment){
         //var id = this.getNextID();
-        var expenseObject = new ExpenseList(id, date, type, vendor, city, state, amount, currency, paymentMethod, comment, this.remove);
+        var expenseObject = new ExpenseList(id, date, type, vendor, city, state, amount, currency, paymentMethod, comment);
         this.dataArray.push(expenseObject);
 
         return this.dataArray.length;
 
     }
+
+    getAllCheckedId(){
+        const checkedValue = [];
+        $('.checkbox:checked').each((index, element) => {
+            const value = $(element).val();
+            checkedValue.push(value);
+        });
+        return checkedValue;
+    }
+
+    handleDelete (){
+        const checkedValue = this.getAllCheckedId();
+        this.remove(checkedValue);
+    }
+
     /* remove - called from the student object when the student is removing itself, so the model can also remove it from the list
     purpose - finds the given student in the model's list, and removes it
     params: (ExpenseList object) the student to remove
     return: (boolean) true if the student was removed, false if not
     */
-    remove(expense){
-        var indexToDelete = null;
-        for(var index = 0; index < this.dataArray.length; index++){
-            if(this.dataArray[index] === expense){
-                indexToDelete = index;
-                break;
-            }
+    remove(idArr){
+        var indexToDelete = [];
+        var expenseToDelete = [];
+
+        if(idArr.length === 0){
+            return false;
         }
-        if(indexToDelete === null){
+        idArr.map( id => {
+            for(let index = 0; index < this.dataArray.length; index++){
+                if(this.dataArray[index].data.id === id){
+                    indexToDelete.push(index);
+                    const deletedExpense = this.dataArray.splice(index, 1);
+                    expenseToDelete.push(deletedExpense[0]);
+                    break;
+                }
+            }
+        });
+
+        if(indexToDelete.length === 0){
             return false;
         }
         $('.errorMessage').show();
-        this.dataArray.splice(indexToDelete, 1);
-        console.log('expense id:', expense);
+
         $.ajax({
             url: 'http://localhost/expense_tracker/server/deleteExpense.php',
             method: 'POST',
-            data: {expense_id: expense.data.id},
+            data: {expense_idArr: idArr},
             dataType: 'json',
             success: function(response){
                 $('.errorMessage').hide();
@@ -71,21 +89,81 @@ class Model{
                     $('.loadingButton').hide();
                     $('.errorText').text(response.errors);
                     $('.errorMessage').show();
-                    console.log('1');
-                    return false;
-                }
 
+                    return false;
+                } else {
+                    expenseToDelete.map(item => {
+                       item.domElements.row.remove();
+                    });
+                }
             }
         });
-        console.log('2');
         return true;
     }
-    /* getAllStudents - get the entire list of students and return it
-    params: none
-    return: (array) a list of all the student objects
+    /* update - change a value in the student record
+    purpose: ensure that the field is one that can be changed (either id, name, course, or grade)
+        if not changable, return false
+        otherwise update the value
+            save the value into the properties stored in the constructor
+            go to the dom element of the appropriate field and change the text
+                (for example, if name was changed, go to the student's name TD and change the name as well)
+            and return true
+    params:
+        (string) field - the field in the object to change
+        (multiple) value - the value to change the field to
+    return: (boolean) true if it was changed, false if it was not
     */
-    getAllStudents(){
-        return this.dataArray;
+    handleUpdateClick(field, value){
+        /*
+         if(field === 'id' || field === 'date' || field === 'type' || field === 'amount' || field === 'comment'){
+            this.data[field]= value;
+            $(this.domElements[field]).text(value);
+            return true;
+        } else {
+            return false;
+        }
+         */
+        let carouselItem = $('<div>').addClass('item active');
+        //$('.form').clone().appendTo(carouselItem);
+        let form = $('.form').clone().attr("class", "form2").appendTo(carouselItem).appendTo($('.carousel-inner'));
+        $('.form2').find($('label [for="expenseDate"]')).attr('for', 'expenseDate1');
+        $('.form2').find($('#expenseDate')).attr("id", "expenseDate1");
+        //form.appendTo(carouselItem);
+        //carouselItem.appendTo($('.carousel-inner'));
+
+        const checkedValue = this.getAllCheckedId();
+        console.log('checked values:', checkedValue);
+        if(checkedValue.length === 0){
+            return;
+        }
+        $.ajax({
+            url: 'http://localhost/expense_tracker/server/getAllExpenses.php',
+            method: 'POST',
+            data: {expense_idArr: checkedValue},
+            dataType: 'json',
+            success: response => {
+                response.data.map(item => {
+                    console.log(typeof item.date);
+                    const type = item.type.toLowerCase();
+                    carouselItem.find($(`#expenseType option[value=${type}]`)).attr('selected', true);
+                    console.log(carouselItem.find($('#expenseDate')));
+                    //carouselItem.find($('#expenseDate')).val("2019-04-02");
+                    $('#expenseDate1').val(item.date);
+                })
+            }
+        });
+    }
+
+    handleSearchClick(){
+        const value = $('.searchBtn').val();
+
+        if(value) {
+            this.handleGetData(this.displayExpenses, value);
+        }
+    }
+
+    handleCancelClick(){
+        $('.carousel-inner').empty();
     }
     /* getStudentByField - find a particular student by an arbitrary field, for example find the student with a name of "John Smith"
     purpose:
@@ -107,39 +185,16 @@ class Model{
         }
         return -1;
     }
-    /* calculateGradeAverage - calculate the average grade of all students
-    purpose:
-        iterate through all students
-        sum up their grades
-        divide by the number of grades to get the average and return it
-        Will return 0 if there are no students
-    params: none
-    return: (number) the average grade of all students
-    */
-    calculateGradeAverage(){
-        var totalGrade = 0;
-        for(var index = 0; index < this.dataArray.length; index++){
-            totalGrade += this.dataArray[index].data.grade;
-        }
-        var averageGrade = totalGrade / this.dataArray.length;
-        if(this.dataArray.length === 0){
-            return 0;
-        } else {
-            return averageGrade;
-        }
-    }
 
-    addGetDataHandler(){
-        $('#getDataButton').click(this.handleGetData);
-    }
 
-    handleGetData (callThisFunctionAfterWeGetData){
+    handleGetData (callThisFunctionAfterWeGetData, value){
         //var self = this;
         $.ajax({
             //url: 'http://s-apis.learningfuze.com/sgt/get',
             url: 'http://localhost/expense_tracker/server/getAllExpenses.php',
             method: 'POST',
             dataType: 'json',
+            data: {searchValue: value},
             success: (function (response) {
 
                 for (var index = 0; index < response.data.length; index++) {
@@ -163,5 +218,18 @@ class Model{
             }).bind(this) //: is like =, when the computer read the lines and construct the object it will take care the right side first before the left side of the colon;
             // so when it reads .bind(this) the object hasn't finished constructing yet so it is not a object yet, 'this' still reference to the model object.
         })//.then( someFunction )
+    }
+
+    handleSelectAllClick (){
+        $('.allCheckbox').click(this.handleSelectAll);
+    }
+
+    handleSelectAll (){
+        const checkboxElem = $('.checkbox');
+        if($('.checkbox:checked').length !== checkboxElem.length){
+            checkboxElem.prop('checked', true);
+        } else {
+            checkboxElem.prop('checked', false);
+        }
     }
 }

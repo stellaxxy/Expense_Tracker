@@ -1,40 +1,57 @@
 .mainHeadingBig {
     position: relative;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .container {
     position: relative;
     height: 100vh;
+    width: 100%;
 }
 
 .page-header {
-    height: 10vh;
+    height: 8vh;
 }
+
+.btnContainer {
+    height: 5vh;
+}
+
+.bottomContainer {
+    height: 87vh;
+    width: 100%;
+    position: relative;
+}
+
 .expense-add-form {
     position: absolute;
     right: 0;
-    top: 80px;
     font-family: arial, helvetica, sans-serif;
     width: 27%;
 }
 
 .bottomExpenseDiv {
     height: 90vh;
+    width: 73%;
 }
 
-.bottomTable th {
-    width: 15vw;
+.tableElement {
+    width: 21%;
+}
+
+.selectAll {
+    width: 4%;
 }
 
 .bottomTable {
-    width: 68%;
+    width: 95%;
     position: relative;
     top: 3%;
     border-collapse: collapse;
 }
 
 #displayArea td {
-    width: 14vw;
     text-align: center;
 }
 
@@ -134,6 +151,93 @@ td {
     font-size: 80%;
 }
 
+.addBtnContainer,
+.deleteBtnContainer,
+.updateBtnContainer {
+    display: inline-block;
+    position: relative;
+    top: 50%;
+    transform: translate(0, -50%);
+    margin-right: 25px;
+}
+
+.deleteBtn,
+.updateBtn {
+    border-radius: 5px;
+    padding: 5px;
+    background-color: darkseagreen;
+}
+
+.searchBtn {
+    background-color: darkseagreen;
+    padding: 5px;
+}
+
+.addBtnContainer {
+    border: 1px dotted darkred;
+    border-radius: 5px;
+    padding: 5px;
+    display: none;
+}
+
+.searchBtnContainer {
+    display: inline-block;
+    border-radius: 5px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    background-color: darkseagreen;
+}
+
+.updateForm {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: whitesmoke;
+    display: none;
+}
+
+.updateBottomContainer {
+    width: 100%;
+    text-align: center;
+}
+
+.item {
+    padding: 15px;
+    padding-top: 30px;
+    margin-left: 60px;
+    margin-right: 60px;
+}
+
+.modal .modal-dialog{
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.modal-body {
+    padding: 0;
+}
+
+#updateModal {
+    padding: 0 !important;
+}
+
+.modal::-webkit-scrollbar {
+    width: 0.2px;
+}
+
+.tableElement {
+    text-align: center;
+}
+
+#displayArea .checkbox {
+    margin: auto;
+}
+
+.dropdown-submenu:hover>.dropdown-menu {
+    display: inline-block;
+}
 @media (max-width: 768px) {
     body > * {
         box-sizing: border-box;

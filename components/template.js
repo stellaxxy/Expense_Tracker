@@ -5,14 +5,12 @@ class SGT_template{
     return: undefined
     */
     constructor( object ){
-        this.model = new Model();
+        this.displayAllExpenses = this.displayAllExpenses.bind(this);
+        this.model = new Model(this.displayAllExpenses);
         this.elementConfig = object;
-
         this.handleCancel = this.handleCancel.bind(this);
         this.handleAdd = this.handleAdd.bind(this);
-        this.displayAllStudents = this.displayAllStudents.bind(this);
-
-        this.model.handleGetData( this.displayAllStudents );
+        this.model.handleGetData( this.displayAllExpenses );
     }
     /* addEventHandlers - add event handlers to premade dom elements
     adds click handlers to add and cancel buttons using the dom elements passed into constructor
@@ -119,7 +117,7 @@ class SGT_template{
     params: none
     return: undefined
     */
-    displayAllStudents(){
+    displayAllExpenses(){
         this.elementConfig.displayArea.empty();
         var allStudents = this.model.dataArray;
         for(var index = 0; index < allStudents.length; index++){

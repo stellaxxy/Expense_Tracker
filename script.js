@@ -27,14 +27,14 @@ function startApp(){
         paymentMethodInput: $("#paymentMethod"),
         commentInput: $("#comment"),
         displayArea: $("#displayArea"),
-        averageArea: $(".avgGrade")
     });
     SGT.addEventHandlers();
-    SGT.model.addGetDataHandler();
+    SGT.model.handleSelectAllClick();
     closeButtonClick();
-
-    // SGT.model.handleGetDataClick();
-
+    $('.deleteBtn').click(SGT.model.handleDelete);
+    $('.updateBtn').click(SGT.model.handleUpdateClick);
+    $('.updateCancelBtn').click(SGT.model.handleCancelClick);
+    $('.searchBtn').click(SGT.model.handleSearchClick);
 }
 
 function closeButtonClick(){

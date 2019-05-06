@@ -20,45 +20,22 @@ class ExpenseList{
     will not be built out.
     Please make sure you understand what is going on and could recreate it via notes rather than direct copying!
     */
-    constructor(id, date, type, vendor, city, state, amount, currency, paymentMethod, comment, deleteCallback=()=>{}){
+    constructor(id, date, type, vendor, city, state, amount, currency, paymentMethod, comment){
         this.data = {
             id, date, type, vendor, city, state, amount: parseFloat(amount).toFixed(2), currency, paymentMethod, comment
         };
-        this.deleteCallback = deleteCallback;
         this.domElements = {
             row: null,
+            checkbox: null,
             date: null,
             type: null,
             amount: null,
             comment: null,
             operations: null,
-            deleteButton: null
         };
         this.handleDelete = this.handleDelete.bind( this );
     }
-    /* update - change a value in the student record
-    purpose: ensure that the field is one that can be changed (either id, name, course, or grade)
-        if not changable, return false
-        otherwise update the value
-            save the value into the properties stored in the constructor
-            go to the dom element of the appropriate field and change the text
-                (for example, if name was changed, go to the student's name TD and change the name as well)
-            and return true
-    params:
-        (string) field - the field in the object to change
-        (multiple) value - the value to change the field to
-    return: (boolean) true if it was changed, false if it was not
-    */
-    update(field, value){
 
-        if(field === 'id' || field === 'date' || field === 'type' || field === 'amount' || field === 'comment'){
-            this.data[field]= value;
-            $(this.domElements[field]).text(value);
-            return true;
-        } else {
-            return false;
-        }
-    }
     /* getData - get all the student data as a simple object
     params: none
     return: (object) an object with the following data
@@ -103,21 +80,28 @@ class ExpenseList{
         var bottomAmount = $('<span>').text(this.data.currency).addClass('bottomCell');
         amountColumn.append(topAmount,bottomAmount);
         var commentColumn = $('<td>').text(this.data.comment);
-        var operationColumn = $('<td>');
-        var deleteButton = $('<button>').text('delete').css('background-color', 'red');
+        //var operationColumn = $('<td>');
+        //var deleteButton = $('<button>').text('delete').css('background-color', 'red');
+        var checkboxInput = $('<input>').attr({
+            type: 'checkbox',
+            name: 'selectedItems',
+            value: this.data.id
+        }).addClass('checkbox');
+        var checkboxColumn = $('<td>').append(checkboxInput);
 
         this.domElements.row = row;
+        this.domElements.checkbox = checkboxColumn;
         this.domElements.date = dateColumn;
         this.domElements.type = typeColumn;
         this.domElements.amount = amountColumn;
         this.domElements.comment = commentColumn;
-        this.domElements.operations = operationColumn;
-        this.domElements.deleteButton = deleteButton;
+        //this.domElements.operations = operationColumn;
+        //this.domElements.deleteButton = deleteButton;
 
-        operationColumn.append(deleteButton);
-        row.append(dateColumn, typeColumn, amountColumn, commentColumn, operationColumn);
+        //operationColumn.append(deleteButton);
+        row.append(checkboxColumn, dateColumn, typeColumn, amountColumn, commentColumn);
 
-        deleteButton.click(this.handleDelete);
+        //deleteButton.click(this.handleDelete);
         return row;
     }
     /* handleDelete - call the model delete callback, and remove this student's dom element
