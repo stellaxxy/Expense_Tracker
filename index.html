@@ -56,10 +56,10 @@
             <div class="form">
                 <div class="form-element">
                     <div class="labelDiv">
-                        <label for="expenseType">Type:</label>
+                        <label class="expenseType" for="expenseType">Type:</label>
                     </div>
 
-                    <select name="expenseType" id="expenseType" class="form-input">
+                    <select name="expenseType" id="expenseType" class="form-input expenseType">
                         <option value="" selected disabled hidden></option>
                         <option value="mortgage">Mortgage</option>
                         <option value="rent">Rent</option>
@@ -81,31 +81,31 @@
                 </div>
                 <div class="form-element">
                     <div class="labelDiv">
-                        <label for="expenseDate">Date:</label>
+                        <label class="expenseDate" for="expenseDate">Date:</label>
                     </div>
 
-                    <input type="date" class="form-input" name="expenseDate" id="expenseDate">
+                    <input type="date" class="form-input expenseDate" name="expenseDate" id="expenseDate">
                 </div>
                 <div class="form-element">
                     <div class="labelDiv">
-                        <label for="vendor">Vendor:</label>
+                        <label class="vendor" for="vendor">Vendor:</label>
                     </div>
 
-                    <input type="text" class="form-input" name="vendor" id="vendor" placeholder="Vendor">
+                    <input type="text" class="form-input vendor" name="vendor" id="vendor" placeholder="Vendor">
                 </div>
                 <div class="form-element">
                     <div class="labelDiv">
-                        <label for="city">City:</label>
+                        <label class="city" for="city">City:</label>
                     </div>
 
-                    <input type="text" class="form-input" name="city" id="city" placeholder="City">
+                    <input type="text" class="form-input city" name="city" id="city" placeholder="City">
                 </div>
                 <div class="form-element">
                     <div class="labelDiv">
-                        <label for="state">State:</label>
+                        <label class="state" for="state">State:</label>
                     </div>
 
-                    <select class="form-input" name="state" id="state">
+                    <select class="form-input state" name="state" id="state">
                         <option value="" selected hidden disabled></option>
                         <option value="AL">AL</option>
                         <option value="AK">AK</option>
@@ -161,11 +161,11 @@
                 </div>
                 <div class="form-element">
                     <div class="labelDiv">
-                        <label for="amount">Amount:</label>
+                        <label class="amount" for="amount">Amount:</label>
                     </div>
 
-                    <input type="text" class="form-input" name="amount" id="amount">
-                    <select name="currency" id="currency" class="form-input">
+                    <input type="text" class="form-input amount" name="amount" id="amount">
+                    <select name="currency" id="currency" class="form-input currency">
                         <option value="USD" selected>USD</option>
                         <option value="EUR">EUR</option>
                         <option value="CNY">CNY</option>
@@ -178,10 +178,10 @@
                 </div>
                 <div class="form-element">
                     <div class="labelDiv">
-                        <label for="paymentMethod">Payment Method:</label>
+                        <label class="paymentMethod" for="paymentMethod">Payment Method:</label>
                     </div>
 
-                    <select name="paymentMethod" id="paymentMethod" class="form-input">
+                    <select name="paymentMethod" id="paymentMethod" class="form-input paymentMethod">
                         <option value="" selected disabled hidden></option>
                         <option value="cash">Cash</option>
                         <option value="credit card">Credit Card</option>
@@ -191,10 +191,10 @@
                 </div>
                 <div class="form-element">
                     <div class="labelDiv">
-                        <label for="comment">Comment:</label>
+                        <label class="comment" for="comment">Comment:</label>
                     </div>
 
-                    <input type="text" class="form-input" name="comment" id="comment">
+                    <input type="text" class="form-input comment" name="comment" id="comment">
                 </div>
             </div>
             <button type="button" class="add" id="addButton">Add</button>
@@ -229,21 +229,11 @@
         <div class="modal fade updateForm" id="updateModal" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="updateContentArea modal-body">
-                        <div id="updateCarousel" class="carousel slide" data-ride="carousel">
-                            <div class="carousel-inner">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Update</h4>
+                    </div>
+                    <div class="modal-body">
 
-                            </div>
-
-                            <a href="#updateCarousel" class="left carousel-control" data-slide="prev">
-                                <span class="glyphicon glyphicon-chevron-left"></span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                            <a class="right carousel-control" href="#updateCarousel" data-slide="next">
-                                <span class="glyphicon glyphicon-chevron-right"></span>
-                                <span class="sr-only">Next</span>
-                            </a>
-                        </div>
                     </div>
                     <div class="updateBottomContainer modal-footer">
                         <button class="updateConfirmBtn btn">UPDATE</button>

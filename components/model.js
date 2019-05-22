@@ -123,19 +123,44 @@ class Model{
             return false;
         }
          */
-        let carouselItem = $('<div>').addClass('item active');
-        //$('.form').clone().appendTo(carouselItem);
-        let form = $('.form').clone().attr("class", "form2").appendTo(carouselItem).appendTo($('.carousel-inner'));
-        $('.form2').find($('label [for="expenseDate"]')).attr('for', 'expenseDate1');
-        $('.form2').find($('#expenseDate')).attr("id", "expenseDate1");
-        //form.appendTo(carouselItem);
-        //carouselItem.appendTo($('.carousel-inner'));
-
         const checkedValue = this.getAllCheckedId();
-        console.log('checked values:', checkedValue);
+
         if(checkedValue.length === 0){
+            const noItemSelectedDiv = $('<div>').text('Please select one item.');
+            noItemSelectedDiv.appendTo($('.modal-body'));
             return;
         }
+
+        let updateFormDiv = $('<div>');
+        $('.form').clone().appendTo(updateFormDiv);
+        updateFormDiv.appendTo($('.modal-body'));
+
+        $('.modal-body .form').find($('label.expenseType')).attr('for', 'updateExpenseType');
+        $('.modal-body .form').find($('select.expenseType')).attr('id', 'updateExpenseType');
+
+        $('.modal-body .form').find($('label.expenseDate')).attr('for', 'updateExpenseDate');
+        $('.modal-body .form').find($('input.expenseDate')).attr('id', 'updateExpenseDate');
+
+        $('.modal-body .form').find($('label.vendor')).attr('for', 'updateVendor');
+        $('.modal-body .form').find($('input.vendor')).attr('id', 'updateVendor');
+
+        $('.modal-body .form').find($('label.city')).attr('for', 'updateCity');
+        $('.modal-body .form').find($('input.city')).attr('id', 'updateCity');
+
+        $('.modal-body .form').find($('label.state')).attr('for', 'updateState');
+        $('.modal-body .form').find($('select.state')).attr('id', 'updateState');
+
+        $('.modal-body .form').find($('label.amount')).attr('for', 'updateAmount');
+        $('.modal-body .form').find($('input.amount')).attr('id', 'updateAmount');
+        $('.modal-body .form').find($('select.currency')).attr('id', 'updateCurrency');
+
+
+        $('.modal-body .form').find($('label.paymentMethod')).attr('for', 'updatePaymentMethod');
+        $('.modal-body .form').find($('select.paymentMethod')).attr('id', 'updatePaymentMethod');
+
+        $('.modal-body .form').find($('label.comment')).attr('for', 'updateComment');
+        $('.modal-body .form').find($('input.comment')).attr('id', 'updateComment');
+
         $.ajax({
             url: 'http://localhost/expense_tracker/server/getAllExpenses.php',
             method: 'POST',
@@ -143,15 +168,25 @@ class Model{
             dataType: 'json',
             success: response => {
                 response.data.map(item => {
-                    console.log(typeof item.date);
+                    console.log('item:', item);
                     const type = item.type.toLowerCase();
-                    carouselItem.find($(`#expenseType option[value=${type}]`)).attr('selected', true);
-                    console.log(carouselItem.find($('#expenseDate')));
-                    //carouselItem.find($('#expenseDate')).val("2019-04-02");
-                    $('#expenseDate1').val(item.date);
+                    updateFormDiv.find($(`#updateExpenseType option[value=${type}]`)).attr('selected', true);
+                    updateFormDiv.find($(`#updateExpenseDate`)).val(item.date);
+                    updateFormDiv.find($(`#updateVendor`)).val(item.vendor);
+                    updateFormDiv.find($(`#updateCity`)).val(item.city);
+                    updateFormDiv.find($(`#updateState option[value=${item.state}]`)).attr('selected', true);
+                    updateFormDiv.find($(`#updateAmount`)).val(item.amount);
+                    updateFormDiv.find($(`#updateCurrency option[value=${item.amount}]`)).attr('selected', true);
+                    updateFormDiv.find($(`#updatePaymentMethod option[value='${item.paymentMethod}']`)).attr('selected', true);
+                    updateFormDiv.find($(`#updateComment`)).val(item.comment);
                 })
             }
         });
+
+    }
+
+    handleUpdateConfirm(){
+
     }
 
     handleSearchClick(){
@@ -163,7 +198,7 @@ class Model{
     }
 
     handleCancelClick(){
-        $('.carousel-inner').empty();
+        $('.modal-body').empty();
     }
     /* getStudentByField - find a particular student by an arbitrary field, for example find the student with a name of "John Smith"
     purpose:

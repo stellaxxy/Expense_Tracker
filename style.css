@@ -200,6 +200,7 @@ td {
 .updateBottomContainer {
     width: 100%;
     text-align: center;
+    padding: 10px;
 }
 
 .item {
@@ -217,6 +218,16 @@ td {
 
 .modal-body {
     padding: 0;
+    height: 70%;
+    overflow-y: scroll;
+}
+
+.modal-header {
+    height: 14%;
+}
+
+.modal-content {
+    height: 100%;
 }
 
 #updateModal {
