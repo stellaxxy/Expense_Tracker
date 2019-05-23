@@ -2,13 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2ab82369-5c53-4a5e-b11a-bf2709b758f7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/expenseList.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/expenseList.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/model.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/model.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/template.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/template.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/script.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/createExpense.php" beforeDir="false" afterPath="$PROJECT_DIR$/server/createExpense.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/getAllExpenses.php" beforeDir="false" afterPath="$PROJECT_DIR$/server/getAllExpenses.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -35,36 +33,36 @@
           <entry key="css" value="9" />
           <entry key="gitignore" value="2" />
           <entry key="html" value="8" />
-          <entry key="js" value="33" />
+          <entry key="js" value="35" />
           <entry key="md" value="2" />
-          <entry key="php" value="32" />
+          <entry key="php" value="35" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CSS" value="9" />
           <entry key="HTML" value="8" />
-          <entry key="JavaScript" value="33" />
+          <entry key="JavaScript" value="35" />
           <entry key="Markdown" value="2" />
-          <entry key="PHP" value="32" />
+          <entry key="PHP" value="35" />
           <entry key="PLAIN_TEXT" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="css" value="1714" />
+          <entry key="css" value="1715" />
           <entry key="gitignore" value="20" />
-          <entry key="html" value="3278" />
-          <entry key="js" value="8193" />
-          <entry key="php" value="4265" />
+          <entry key="html" value="3308" />
+          <entry key="js" value="9238" />
+          <entry key="php" value="4447" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="CSS" value="1714" />
-          <entry key="HTML" value="3278" />
-          <entry key="JavaScript" value="8193" />
-          <entry key="PHP" value="4263" />
+          <entry key="CSS" value="1715" />
+          <entry key="HTML" value="3308" />
+          <entry key="JavaScript" value="9238" />
+          <entry key="PHP" value="4445" />
           <entry key="PLAIN_TEXT" value="20" />
           <entry key="SQL" value="2" />
         </counts>
@@ -76,11 +74,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/components/model.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="59" column="38" lean-forward="true" selection-start-line="59" selection-start-column="38" selection-end-line="59" selection-end-column="38" />
+            <state relative-caret-position="525">
+              <caret line="358" column="36" selection-start-line="358" selection-start-column="36" selection-end-line="358" selection-end-column="36" />
             </state>
           </provider>
         </entry>
@@ -88,8 +86,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/components/expenseList.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-828">
-              <caret line="32" column="26" lean-forward="true" selection-start-line="32" selection-start-column="26" selection-end-line="32" selection-end-column="26" />
+            <state relative-caret-position="374">
+              <caret line="22" column="93" lean-forward="true" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="93" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/getAllExpenses.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="391">
+              <caret line="23" column="81" selection-start-line="23" selection-start-column="81" selection-end-line="23" selection-end-column="81" />
             </state>
           </provider>
         </entry>
@@ -97,8 +104,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/components/template.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1394">
-              <caret line="82" column="39" lean-forward="true" selection-start-line="82" selection-start-column="39" selection-end-line="82" selection-end-column="39" />
+            <state relative-caret-position="423">
+              <caret line="28" column="76" selection-start-line="28" selection-start-column="76" selection-end-line="28" selection-end-column="76" />
             </state>
           </provider>
         </entry>
@@ -106,8 +113,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/script.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="531">
-              <caret line="38" selection-start-line="38" selection-end-line="38" />
+            <state relative-caret-position="480">
+              <caret line="35" column="34" selection-start-line="35" selection-start-column="34" selection-end-line="35" selection-end-column="34" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -115,20 +122,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="278">
-              <caret line="45" column="30" selection-start-line="45" selection-start-column="30" selection-end-line="45" selection-end-column="30" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/style.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3434">
-              <caret line="202" column="18" selection-start-line="202" selection-start-column="18" selection-end-line="202" selection-end-column="18" />
+            <state relative-caret-position="442">
+              <caret line="83" column="50" lean-forward="true" selection-start-line="83" selection-start-column="39" selection-end-line="83" selection-end-column="50" />
             </state>
           </provider>
         </entry>
@@ -166,15 +164,15 @@
         <option value="$PROJECT_DIR$/server/dummydata/dummyData.js" />
         <option value="$PROJECT_DIR$/server/dummydata/dummyData.php" />
         <option value="$PROJECT_DIR$/server/deleteExpense.php" />
-        <option value="$PROJECT_DIR$/server/getAllExpenses.php" />
-        <option value="$PROJECT_DIR$/style.css" />
         <option value="$PROJECT_DIR$/components/expenseList.js" />
         <option value="$PROJECT_DIR$/server/createExpense.php" />
-        <option value="$PROJECT_DIR$/script.js" />
         <option value="$PROJECT_DIR$/server/updateExpense.php" />
-        <option value="$PROJECT_DIR$/components/model.js" />
-        <option value="$PROJECT_DIR$/components/template.js" />
+        <option value="$PROJECT_DIR$/style.css" />
         <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/script.js" />
+        <option value="$PROJECT_DIR$/components/template.js" />
+        <option value="$PROJECT_DIR$/server/getAllExpenses.php" />
+        <option value="$PROJECT_DIR$/components/model.js" />
       </list>
     </option>
   </component>
@@ -184,11 +182,10 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="3090" />
-    <option name="y" value="1" />
-    <option name="width" value="1395" />
-    <option name="height" value="1455" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="2835" />
+    <option name="width" value="1656" />
+    <option name="height" value="1453" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -254,18 +251,18 @@
       <workItem from="1557256346677" duration="862000" />
       <workItem from="1558233746456" duration="1223000" />
       <workItem from="1558485500304" duration="10540000" />
-      <workItem from="1558551098467" duration="21258000" />
+      <workItem from="1558551098467" duration="28548000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="178706000" />
+    <option name="totallyTimeSpent" value="185996000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="2589" y="1" width="797" height="831" extended-state="0" />
+    <frame x="2443" y="0" width="946" height="830" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49924812" visible="true" weight="0.0" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49924812" visible="true" weight="0.030405406" />
       <window_info id="Favorites" order="1" sideWeight="0.50075185" side_tool="true" weight="0.20990565" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -330,13 +327,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3434">
-          <caret line="202" column="18" selection-start-line="202" selection-start-column="18" selection-end-line="202" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/server/mysqlcredentials.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -351,20 +341,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/getAllExpenses.php">
+    <entry file="file://$PROJECT_DIR$/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="26" column="33" selection-start-line="26" selection-start-column="33" selection-end-line="26" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/script.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="531">
-          <caret line="38" selection-start-line="38" selection-end-line="38" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
+        <state relative-caret-position="617">
+          <caret line="328" column="1" selection-start-line="328" selection-start-column="1" selection-end-line="328" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -375,31 +355,48 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/components/model.js">
+    <entry file="file://$PROJECT_DIR$/components/expenseList.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="59" column="38" lean-forward="true" selection-start-line="59" selection-start-column="38" selection-end-line="59" selection-end-column="38" />
+        <state relative-caret-position="374">
+          <caret line="22" column="93" lean-forward="true" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="93" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/components/expenseList.js">
+    <entry file="file://$PROJECT_DIR$/script.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-828">
-          <caret line="32" column="26" lean-forward="true" selection-start-line="32" selection-start-column="26" selection-end-line="32" selection-end-column="26" />
+        <state relative-caret-position="480">
+          <caret line="35" column="34" selection-start-line="35" selection-start-column="34" selection-end-line="35" selection-end-column="34" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/components/template.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1394">
-          <caret line="82" column="39" lean-forward="true" selection-start-line="82" selection-start-column="39" selection-end-line="82" selection-end-column="39" />
+        <state relative-caret-position="423">
+          <caret line="28" column="76" selection-start-line="28" selection-start-column="76" selection-end-line="28" selection-end-column="76" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="278">
-          <caret line="45" column="30" selection-start-line="45" selection-start-column="30" selection-end-line="45" selection-end-column="30" />
+        <state relative-caret-position="442">
+          <caret line="83" column="50" lean-forward="true" selection-start-line="83" selection-start-column="39" selection-end-line="83" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/getAllExpenses.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="81" selection-start-line="23" selection-start-column="81" selection-end-line="23" selection-end-column="81" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/model.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="358" column="36" selection-start-line="358" selection-start-column="36" selection-end-line="358" selection-end-column="36" />
         </state>
       </provider>
     </entry>

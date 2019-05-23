@@ -21,10 +21,13 @@ if(!empty($_POST['expense_idArr'])){
     $query = "$query WHERE `id` IN ($all_id)";
 }
 
-if(!empty($_POST['searchValue'])){
-    $_POST['searchValue'] = addslashes($_POST['searchValue']);
-    if($_POST['searchValue'] === 'type' || $_POST['searchValue'] === 'city' || $_POST['searchValue'] === 'year'){
-        $query = "$query WHERE ";
+if(array_key_exists('searchType', $_POST)&&array_key_exists('searchValue', $_POST)){
+    foreach($_POST as $key=>$value){
+        $_POST[$key] = addslashes($value);
+    }
+
+    if($_POST['searchType'] === 'type' || $_POST['searchType'] === 'city' || $_POST['searchType'] === 'year'){
+        $query = "$query WHERE {$_POST['searchType']} = '{$_POST['searchValue']}'";
     }
 }
 

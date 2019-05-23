@@ -31,7 +31,9 @@ function startApp(){
         updateButton: $('.updateBtn'),
         updateCancelButton: $('.updateCancelBtn'),
         searchButton: $('.searchBtn'),
-        updateConfirmButton: $('.updateConfirmBtn')
+        updateConfirmButton: $('.updateConfirmBtn'),
+        searchType: $('.searchType li'),
+        searchAll: $('.searchAll')
     });
     SGT.addEventHandlers();
     SGT.model.handleSelectAllClick();

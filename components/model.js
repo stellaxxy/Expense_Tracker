@@ -6,6 +6,7 @@ class Model{
     */
     constructor(displayExpense=()=>{}){
         this.dataArray = [];
+        this.selectedDataArray = [];
         this.id = 0;
         this.displayExpenses = displayExpense;
 
@@ -13,7 +14,7 @@ class Model{
         this.handleGetData = this.handleGetData.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
         this.handleUpdateClick = this.handleUpdateClick.bind(this);
-        this.handleSearchClick = this.handleSearchClick.bind(this);
+        this.handleTypeSearchClick = this.handleTypeSearchClick.bind(this);
     }
     /* add - add a student to the model
     purpose:
@@ -260,13 +261,15 @@ class Model{
         return {type, city: capitalizedCity, vendor: capitalizedVendor};
     }
 
-    handleSearchClick(){
-        const value = $('.searchBtn').val();
-
-        if(value) {
-            this.handleGetData(this.displayExpenses, value);
-        }
+    handleTypeSearchClick(elem){
+        let type = elem.target.text;
+        type = type.toLowerCase();
+        this.handleGetData(this.displayExpenses, 'type', type);
     }
+
+    handleSearchAllClick = ()=> {
+        
+    };
 
     handleCancelClick(){
         $('.modal-body').empty();
@@ -293,35 +296,25 @@ class Model{
     }
 
 
-    handleGetData (callThisFunctionAfterWeGetData, value){
-        //var self = this;
+    handleGetData (callThisFunctionAfterWeGetData, type, value){
+        const data = {};
+        if(type&&value){
+            data['searchType'] = type;
+            data['searchValue'] = value;
+        }
         $.ajax({
-            //url: 'http://s-apis.learningfuze.com/sgt/get',
             url: 'http://localhost/expense_tracker/server/getAllExpenses.php',
             method: 'POST',
             dataType: 'json',
-            data: {searchValue: value},
-            success: (function (response) {
-
-                for (var index = 0; index < response.data.length; index++) {
-                    var date = response.data[index].date;
-                    var type = response.data[index].type;
-                    var vendor = response.data[index].vendor;
-                    var id = response.data[index].id;
-                    var city = response.data[index].city;
-                    var state = response.data[index].state;
-                    var amount = response.data[index].amount;
-                    var currency = response.data[index].currency;
-                    var paymentMethod = response.data[index].paymentMethod;
-                    var comment = response.data[index].comment;
-
-
-                    this.add(id, date, type, vendor, city, state, amount, currency, paymentMethod, comment); //self.add()
-                }
-
+            data: data,
+            success: response => {
+                this.dataArray = [];
+                response.data.map(item => {
+                    this.add(item.id, item.date, item.type, item.vendor, item.city, item.state, item.amount, item.currency, item.paymentMethod, item.comment)
+                });
                 callThisFunctionAfterWeGetData()
 
-            }).bind(this) //: is like =, when the computer read the lines and construct the object it will take care the right side first before the left side of the colon;
+            } //: is like =, when the computer read the lines and construct the object it will take care the right side first before the left side of the colon;
             // so when it reads .bind(this) the object hasn't finished constructing yet so it is not a object yet, 'this' still reference to the model object.
         })//.then( someFunction )
     }
