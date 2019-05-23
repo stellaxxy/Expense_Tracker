@@ -27,14 +27,16 @@ function startApp(){
         paymentMethodInput: $("#paymentMethod"),
         commentInput: $("#comment"),
         displayArea: $("#displayArea"),
+        deleteButton: $('.deleteBtn'),
+        updateButton: $('.updateBtn'),
+        updateCancelButton: $('.updateCancelBtn'),
+        searchButton: $('.searchBtn'),
+        updateConfirmButton: $('.updateConfirmBtn')
     });
     SGT.addEventHandlers();
     SGT.model.handleSelectAllClick();
     closeButtonClick();
-    $('.deleteBtn').click(SGT.model.handleDelete);
-    $('.updateBtn').click(SGT.model.handleUpdateClick);
-    $('.updateCancelBtn').click(SGT.model.handleCancelClick);
-    $('.searchBtn').click(SGT.model.handleSearchClick);
+
 }
 
 function closeButtonClick(){

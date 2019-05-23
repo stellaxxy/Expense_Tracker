@@ -33,7 +33,6 @@ class Model{
         this.dataArray.push(expenseObject);
 
         return this.dataArray.length;
-
     }
 
     getAllCheckedId(){
@@ -43,6 +42,29 @@ class Model{
             checkedValue.push(value);
         });
         return checkedValue;
+    }
+
+    updateDataArray(id, date, type, vendor, city, state, amount, currency, paymentMethod, comment){
+        const transformedObj = this.handleTransformCases(type, city, vendor);
+        type = transformedObj.type;
+        city = transformedObj.city;
+        vendor = transformedObj.vendor;
+
+        for(let index = 0; index < this.dataArray.length; index++){
+            if(this.dataArray[index].data.id === id){
+                const item = this.dataArray[index];
+
+                item.data.date = date;
+                item.data.type = type;
+                item.data.vendor = vendor;
+                item.data.city = city;
+                item.data.state = state;
+                item.data.amount = amount;
+                item.data.currency = currency;
+                item.data.paymentMethod = paymentMethod;
+                item.data.comment = comment;
+            }
+        }
     }
 
     handleDelete (){
@@ -113,17 +135,10 @@ class Model{
         (multiple) value - the value to change the field to
     return: (boolean) true if it was changed, false if it was not
     */
-    handleUpdateClick(field, value){
-        /*
-         if(field === 'id' || field === 'date' || field === 'type' || field === 'amount' || field === 'comment'){
-            this.data[field]= value;
-            $(this.domElements[field]).text(value);
-            return true;
-        } else {
-            return false;
-        }
-         */
+    handleUpdateClick(){
         const checkedValue = this.getAllCheckedId();
+
+        $('.modal-body').empty();
 
         if(checkedValue.length === 0){
             const noItemSelectedDiv = $('<div>').text('Please select one item.');
@@ -168,7 +183,6 @@ class Model{
             dataType: 'json',
             success: response => {
                 response.data.map(item => {
-                    console.log('item:', item);
                     const type = item.type.toLowerCase();
                     updateFormDiv.find($(`#updateExpenseType option[value=${type}]`)).attr('selected', true);
                     updateFormDiv.find($(`#updateExpenseDate`)).val(item.date);
@@ -185,8 +199,65 @@ class Model{
 
     }
 
-    handleUpdateConfirm(){
+    handleUpdateConfirmClick = ()=>{
+        const checkedId = this.getAllCheckedId();
 
+        const id = checkedId[0];
+        let type = $('#updateExpenseType').val();
+        const date = $('#updateExpenseDate').val();
+        let vendor = $('#updateVendor').val();
+        let city = $('#updateCity').val();
+        const state = $('#updateState').val();
+        const amount = $('#updateAmount').val();
+        const currency = $('#updateCurrency').val();
+        const paymentMethod = $('#updatePaymentMethod').val();
+        const comment = $('#updateComment').val();
+
+        $.ajax({
+            url: 'http://localhost/expense_tracker/server/updateExpense.php',
+            method: 'POST',
+            data: {id, type, date, vendor, city, state, amount, currency, paymentMethod, comment},
+            dataType: 'json',
+            success: response => {
+                $('.modal-body').empty();
+                $('.modal-footer').empty();
+                if(response.success){
+                    const successMessage = $('<div>').text('Successfully Updated');
+                    successMessage.appendTo($('.modal-body'));
+
+                    this.updateDataArray(id, date, type, vendor, city, state, amount, currency, paymentMethod, comment);
+                    this.displayExpenses();
+                } else {
+                    let error = '';
+                    for(let index = 0; index < response.error.length; index++){
+                        error = error + response.error[index];
+                    }
+                    const errorMessage = $('<div>').text(error);
+                    errorMessage.appendTo($('.modal-body'));
+                }
+                const closeBtn = $('<button>').text('CLOSE').attr('data-dismiss', 'modal');
+                closeBtn.appendTo($('.modal-footer'));
+
+            }
+        });
+    };
+
+    handleTransformCases(type, city, vendor){
+        type = type.toUpperCase();
+
+        const vendorArr = vendor.split(' ');
+        const capitalizedVendorArr = vendorArr.map(item => {
+            return item.charAt(0).toUpperCase() + item.slice(1);
+        });
+        const capitalizedVendor = capitalizedVendorArr.join(' ');
+
+        const cityArr = city.split(' ');
+        const capitalizedCityArr = cityArr.map(item => {
+            return item.charAt(0).toUpperCase() + item.slice(1);
+        });
+        const capitalizedCity = capitalizedCityArr.join(' ');
+
+        return {type, city: capitalizedCity, vendor: capitalizedVendor};
     }
 
     handleSearchClick(){

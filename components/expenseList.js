@@ -80,8 +80,6 @@ class ExpenseList{
         var bottomAmount = $('<span>').text(this.data.currency).addClass('bottomCell');
         amountColumn.append(topAmount,bottomAmount);
         var commentColumn = $('<td>').text(this.data.comment);
-        //var operationColumn = $('<td>');
-        //var deleteButton = $('<button>').text('delete').css('background-color', 'red');
         var checkboxInput = $('<input>').attr({
             type: 'checkbox',
             name: 'selectedItems',
@@ -95,13 +93,9 @@ class ExpenseList{
         this.domElements.type = typeColumn;
         this.domElements.amount = amountColumn;
         this.domElements.comment = commentColumn;
-        //this.domElements.operations = operationColumn;
-        //this.domElements.deleteButton = deleteButton;
 
-        //operationColumn.append(deleteButton);
         row.append(checkboxColumn, dateColumn, typeColumn, amountColumn, commentColumn);
 
-        //deleteButton.click(this.handleDelete);
         return row;
     }
     /* handleDelete - call the model delete callback, and remove this student's dom element

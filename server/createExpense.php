@@ -23,7 +23,7 @@ if(!empty($output['error'])){
 }
 
 $_POST['type'] = strtoupper($_POST['type']);
-$_POST['city'] = ucfirst($_POST['city']);
+$_POST['city'] = ucwords($_POST['city']);
 $_POST['state'] = strtoupper($_POST['state']);
 
 $query = "INSERT INTO `expenses` SET `type`='{$_POST['type']}', `date`='{$_POST['date']}', `vendor`='{$_POST['vendor']}', `city`='{$_POST['city']}', `state`='{$_POST['state']}', `amount`='{$_POST['amount']}', `currency`='{$_POST['currency']}', `paymentMethod`='{$_POST['paymentMethod']}', `comment`='{$_POST['comment']}'";

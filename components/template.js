@@ -19,9 +19,13 @@ class SGT_template{
     */
 
     addEventHandlers(){
-
         this.elementConfig.addButton.click(this.handleAdd);
         this.elementConfig.cancelButton.click(this.handleCancel);
+        this.elementConfig.deleteButton.click(this.model.handleDelete);
+        this.elementConfig.updateButton.click(this.model.handleUpdateClick);
+        this.elementConfig.updateCancelButton.click(this.model.handleCancelClick);
+        this.elementConfig.searchButton.click(this.model.handleSearchClick);
+        this.elementConfig.updateConfirmButton.click(this.model.handleUpdateConfirmClick);
     }
     /* clearInputs - take the three inputs and clear their values
     params: none
@@ -59,23 +63,11 @@ class SGT_template{
     return: undefined
     */
     handleAdd(){
-
         let type = this.elementConfig.typeInput.val();
-        type = type.toUpperCase();
         const date = this.elementConfig.dateInput.val();
-        const vendor = this.elementConfig.vendorInput.val();
-        const vendorArr = vendor.split(' ');
-        const capitalizedVendorArr = vendorArr.map(item => {
-           return item.charAt(0).toUpperCase() + item.slice(1);
-        });
-        const capitalizedVendor = capitalizedVendorArr.join(' ');
+        let vendor = this.elementConfig.vendorInput.val();
 
-        const city = this.elementConfig.cityInput.val();
-        const cityArr = city.split(' ');
-        const capitalizedCityArr = cityArr.map(item => {
-            return item.charAt(0).toUpperCase() + item.slice(1);
-        });
-        const capitalizedCity = capitalizedCityArr.join(' ');
+        let city = this.elementConfig.cityInput.val();
 
         const state = this.elementConfig.stateInput.val();
         let amount = this.elementConfig.amountInput.val();
@@ -85,11 +77,16 @@ class SGT_template{
         const comment = this.elementConfig.commentInput.val();
         var id = null;
 
+        const transformedObj = this.model.handleTransformCases(type, city, vendor);
+        type = transformedObj.type;
+        city = transformedObj.city;
+        vendor = transformedObj.vendor;
+
         $('.errorMessage').show();
         $.ajax({
             url: 'http://localhost/expense_tracker/server/createExpense.php',
             method: 'POST',
-            data: {type, date, vendor: capitalizedVendor, city: capitalizedCity, state, amount, currency, paymentMethod, comment},
+            data: {type, date, vendor, city, state, amount, currency, paymentMethod, comment},
             dataType: 'json',
             success: (function(response){
 
@@ -100,9 +97,9 @@ class SGT_template{
                     $('.errorMessage').show();
                 }
                 id = response.new_id;
-                this.model.add(id, date, type, capitalizedVendor, capitalizedCity, state, amount, currency, paymentMethod, comment);
+                this.model.add(id, date, type, vendor, city, state, amount, currency, paymentMethod, comment);
                 this.clearInputs();
-                this.displayAllStudents();
+                this.displayAllExpenses();
 
             }).bind(this)
         });
