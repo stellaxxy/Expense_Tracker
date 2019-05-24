@@ -268,7 +268,7 @@ class Model{
     }
 
     handleSearchAllClick = ()=> {
-        
+        this.handleGetData(this.displayExpenses);
     };
 
     handleCancelClick(){

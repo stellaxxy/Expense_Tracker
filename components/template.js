@@ -27,6 +27,7 @@ class SGT_template{
         this.elementConfig.updateConfirmButton.click(this.model.handleUpdateConfirmClick);
         this.elementConfig.searchType.click(this.model.handleTypeSearchClick);
         this.elementConfig.searchAll.click(this.model.handleSearchAllClick);
+
     }
     /* clearInputs - take the three inputs and clear their values
     params: none
