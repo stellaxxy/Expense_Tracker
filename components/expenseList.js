@@ -69,17 +69,14 @@ class ExpenseList{
     return: (jquery dom element) the row that contains the student dom elements
     */
     render() {
+        console.log('screen size:', $(window).width());
         var row = $('<tr>');
-        var dateColumn = $('<td>').text(this.data.date);
-        var typeColumn = $('<td>');
-        var topType = $('<span>').text(this.data.type).addClass('topCell');
-        var bottomType = $('<span>').text(`${this.data.vendor}, ${this.data.city}, ${this.data.state}`).addClass('bottomCell');
-        typeColumn.append(topType, bottomType);
+
         var amountColumn = $('<td>');
         var topAmount = $('<span>').text(this.data.amount).addClass('topCell');
         var bottomAmount = $('<span>').text(this.data.currency).addClass('bottomCell');
         amountColumn.append(topAmount,bottomAmount);
-        var commentColumn = $('<td>').text(this.data.comment);
+
         var checkboxInput = $('<input>').attr({
             type: 'checkbox',
             name: 'selectedItems',
@@ -87,14 +84,34 @@ class ExpenseList{
         }).addClass('checkbox');
         var checkboxColumn = $('<td>').append(checkboxInput);
 
-        this.domElements.row = row;
-        this.domElements.checkbox = checkboxColumn;
-        this.domElements.date = dateColumn;
-        this.domElements.type = typeColumn;
-        this.domElements.amount = amountColumn;
-        this.domElements.comment = commentColumn;
+        if($(window).width() <= 576){
+            var detailColumn = $('<td>');
+            var detailType = $('<span>').text(this.data.type).addClass('topCell smallDetailType');
+            var detailDate = $('<span>').text(this.data.date).addClass('topCell smallDetailDate');
+            var detailLocation = $('<span>').text(`${this.data.vendor}, ${this.data.city}, ${this.data.state}`).addClass('topCell smallDetailLocation');
+            var detailComment = $('<span>').text(this.data.comment).addClass('bottomCell');
+            detailColumn.append(detailType, detailDate, detailLocation, detailComment);
 
-        row.append(checkboxColumn, dateColumn, typeColumn, amountColumn, commentColumn);
+            row.append(checkboxColumn, detailColumn, amountColumn);
+        } else {
+            var dateColumn = $('<td>').text(this.data.date);
+            var typeColumn = $('<td>');
+            var topType = $('<span>').text(this.data.type).addClass('topCell');
+            var bottomType = $('<span>').text(`${this.data.vendor}, ${this.data.city}, ${this.data.state}`).addClass('bottomCell');
+            typeColumn.append(topType, bottomType);
+            var commentColumn = $('<td>').text(this.data.comment);
+
+
+            this.domElements.checkbox = checkboxColumn;
+            this.domElements.date = dateColumn;
+            this.domElements.type = typeColumn;
+            this.domElements.amount = amountColumn;
+            this.domElements.comment = commentColumn;
+
+            row.append(checkboxColumn, dateColumn, typeColumn, amountColumn, commentColumn);
+        }
+
+        this.domElements.row = row;
 
         return row;
     }

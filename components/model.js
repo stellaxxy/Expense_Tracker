@@ -50,6 +50,7 @@ class Model{
         type = transformedObj.type;
         city = transformedObj.city;
         vendor = transformedObj.vendor;
+        amount = parseFloat(amount).toFixed(2);
 
         for(let index = 0; index < this.dataArray.length; index++){
             if(this.dataArray[index].data.id === id){
@@ -68,9 +69,25 @@ class Model{
         }
     }
 
+    handleDeleteBtn = ()=>{
+        const checkedValue = this.getAllCheckedId();
+        let message = '';
+        $('.deleteConfirmModalBody').empty();
+        if(checkedValue.length === 0){
+            message = $('<p>').text('Please select an item.').addClass('deleteConfirmMessage');
+
+        } else {
+            message = $('<p>').text('Are you sure you want to delete the selected item?').addClass('deleteConfirmMessage');
+        }
+        message.appendTo($('.deleteConfirmModalBody'));
+        $('.deleteConfirmModal').show();
+    };
+
     handleDelete (){
+        $('.deleteConfirmModal').modal('hide');
         const checkedValue = this.getAllCheckedId();
         this.remove(checkedValue);
+
     }
 
     /* remove - called from the student object when the student is removing itself, so the model can also remove it from the list
@@ -79,15 +96,17 @@ class Model{
     return: (boolean) true if the student was removed, false if not
     */
     remove(idArr){
+
         var indexToDelete = [];
         var expenseToDelete = [];
 
         if(idArr.length === 0){
             return false;
         }
+
         idArr.map( id => {
             for(let index = 0; index < this.dataArray.length; index++){
-                if(this.dataArray[index].data.id === id){
+                if(this.dataArray[index].data.id == id){
                     indexToDelete.push(index);
                     const deletedExpense = this.dataArray.splice(index, 1);
                     expenseToDelete.push(deletedExpense[0]);
@@ -99,7 +118,13 @@ class Model{
         if(indexToDelete.length === 0){
             return false;
         }
-        $('.errorMessage').show();
+
+        let message = '';
+        message = $('<div>').addClass("spinner-border").attr('role', 'status');
+        let spinner = $('<span>').text('Loading...').addClass('sr-only');
+        spinner.appendTo(message);
+        message.appendTo($('.deleteConfirmModalBody'));
+        $('.deleteConfirmModal').show();
 
         $.ajax({
             url: 'http://localhost/expense_tracker/server/deleteExpense.php',
@@ -107,12 +132,13 @@ class Model{
             data: {expense_idArr: idArr},
             dataType: 'json',
             success: function(response){
-                $('.errorMessage').hide();
-                if(response.errors){
-                    $('.loadingButton').hide();
-                    $('.errorText').text(response.errors);
-                    $('.errorMessage').show();
 
+                $('.deleteConfirmModal').modal('hide');
+                if(response.errors){
+
+                    message = $('<p>').text(response.errors);
+                    message.appendTo($('.deleteConfirmModalBody'));
+                    $('.deleteConfirmModal').show();
                     return false;
                 } else {
                     expenseToDelete.map(item => {
@@ -139,7 +165,11 @@ class Model{
     handleUpdateClick(){
         const checkedValue = this.getAllCheckedId();
 
-        $('.modal-body').empty();
+        $('.modal-body.updateBody').empty();
+        const updateBtn = $('<button>').text('UPDATE').addClass('updateConfirmBtn btn').click(this.handleUpdateConfirmClick);
+        const cancelBtn = $('<button>').text('CANCEL').addClass('updateCancelBtn btn').attr({'data-dismiss': 'modal'});
+        $('.updateBottomContainer.modal-footer').empty();
+        $('.updateBottomContainer.modal-footer').append(updateBtn, cancelBtn);
 
         if(checkedValue.length === 0){
             const noItemSelectedDiv = $('<div>').text('Please select one item.');
@@ -148,34 +178,34 @@ class Model{
         }
 
         let updateFormDiv = $('<div>');
-        $('.form').clone().appendTo(updateFormDiv);
-        updateFormDiv.appendTo($('.modal-body'));
+        $('.expense-add-form .form.originalForm').clone().appendTo(updateFormDiv);
+        updateFormDiv.appendTo($('.modal-body.updateBody'));
 
-        $('.modal-body .form').find($('label.expenseType')).attr('for', 'updateExpenseType');
-        $('.modal-body .form').find($('select.expenseType')).attr('id', 'updateExpenseType');
+        $('.modal-body.updateBody .form.originalForm').find($('label.expenseType')).attr('for', 'updateExpenseType');
+        $('.modal-body.updateBody .form.originalForm').find($('select.expenseType')).attr('id', 'updateExpenseType');
 
-        $('.modal-body .form').find($('label.expenseDate')).attr('for', 'updateExpenseDate');
-        $('.modal-body .form').find($('input.expenseDate')).attr('id', 'updateExpenseDate');
+        $('.modal-body.updateBody .form.originalForm').find($('label.expenseDate')).attr('for', 'updateExpenseDate');
+        $('.modal-body.updateBody .form.originalForm').find($('input.expenseDate')).attr('id', 'updateExpenseDate');
 
-        $('.modal-body .form').find($('label.vendor')).attr('for', 'updateVendor');
-        $('.modal-body .form').find($('input.vendor')).attr('id', 'updateVendor');
+        $('.modal-body.updateBody .form.originalForm').find($('label.vendor')).attr('for', 'updateVendor');
+        $('.modal-body.updateBody .form.originalForm').find($('input.vendor')).attr('id', 'updateVendor');
 
-        $('.modal-body .form').find($('label.city')).attr('for', 'updateCity');
-        $('.modal-body .form').find($('input.city')).attr('id', 'updateCity');
+        $('.modal-body.updateBody .form.originalForm').find($('label.city')).attr('for', 'updateCity');
+        $('.modal-body.updateBody .form.originalForm').find($('input.city')).attr('id', 'updateCity');
 
-        $('.modal-body .form').find($('label.state')).attr('for', 'updateState');
-        $('.modal-body .form').find($('select.state')).attr('id', 'updateState');
+        $('.modal-body.updateBody .form.originalForm').find($('label.state')).attr('for', 'updateState');
+        $('.modal-body.updateBody .form.originalForm').find($('select.state')).attr('id', 'updateState');
 
-        $('.modal-body .form').find($('label.amount')).attr('for', 'updateAmount');
-        $('.modal-body .form').find($('input.amount')).attr('id', 'updateAmount');
-        $('.modal-body .form').find($('select.currency')).attr('id', 'updateCurrency');
+        $('.modal-body.updateBody .form.originalForm').find($('label.amount')).attr('for', 'updateAmount');
+        $('.modal-body.updateBody .form.originalForm').find($('input.amount')).attr('id', 'updateAmount');
+        $('.modal-body.updateBody .form.originalForm').find($('select.currency')).attr('id', 'updateCurrency');
 
 
-        $('.modal-body .form').find($('label.paymentMethod')).attr('for', 'updatePaymentMethod');
-        $('.modal-body .form').find($('select.paymentMethod')).attr('id', 'updatePaymentMethod');
+        $('.modal-body.updateBody .form.originalForm').find($('label.paymentMethod')).attr('for', 'updatePaymentMethod');
+        $('.modal-body.updateBody .form.originalForm').find($('select.paymentMethod')).attr('id', 'updatePaymentMethod');
 
-        $('.modal-body .form').find($('label.comment')).attr('for', 'updateComment');
-        $('.modal-body .form').find($('input.comment')).attr('id', 'updateComment');
+        $('.modal-body.updateBody .form.originalForm').find($('label.comment')).attr('for', 'updateComment');
+        $('.modal-body.updateBody .form.originalForm').find($('input.comment')).attr('id', 'updateComment');
 
         $.ajax({
             url: 'http://localhost/expense_tracker/server/getAllExpenses.php',
@@ -237,6 +267,7 @@ class Model{
                     errorMessage.appendTo($('.modal-body'));
                 }
                 const closeBtn = $('<button>').text('CLOSE').attr('data-dismiss', 'modal');
+                //closeBtn.click(this.handlePutBackUpdateBtn);
                 closeBtn.appendTo($('.modal-footer'));
 
             }
@@ -269,6 +300,59 @@ class Model{
 
     handleSearchAllClick = ()=> {
         this.handleGetData(this.displayExpenses);
+    };
+
+    handleSubmenuClick = ()=>{
+        $('.dropdown-submenu > a').on('click', ()=>{
+            event.stopPropagation();
+            event.preventDefault();
+        })
+    };
+
+    handleAddModalClick = ()=>{
+        /*
+        $('.expense-add-form').addClass('modal fade').attr({id: 'addModal', role: 'dialog'});
+        $('.addExpenseModalSecondDiv').addClass('modal-dialog');
+        $('.addExpenseModalThirdDiv').addClass('modal-content');
+        $('.addExpenseHeader').addClass('modal-header');
+        $('.form').addClass('modal-body').css({'margin': '15px'});
+        $('.addExpenseBtnContainer').addClass('modal-footer');
+        $('.addExpenseHeader h4').addClass('modal-title');
+        $('#cancelButton').attr('data-dismiss', 'modal');
+        $('.expenseType option').css({'font-size': '14px', 'width': '25px'})
+        */
+        $('.modal-body.addForm').empty();
+
+        let addFormDiv = $('<div>');
+        $('.expense-add-form .form.originalForm').clone().appendTo(addFormDiv);
+        addFormDiv.appendTo($('.modal-body.addForm'));
+
+        $('.modal-body.addForm .form.originalForm').find($('label.expenseType')).attr('for', 'addExpenseType');
+        $('.modal-body.addForm .form.originalForm').find($('select.expenseType')).attr('id', 'addExpenseType');
+
+        $('.modal-body.addForm .form.originalForm').find($('label.expenseDate')).attr('for', 'addExpenseDate');
+        $('.modal-body.addForm .form.originalForm').find($('input.expenseDate')).attr('id', 'addExpenseDate');
+
+        $('.modal-body.addForm .form.originalForm').find($('label.vendor')).attr('for', 'addVendor');
+        $('.modal-body.addForm .form.originalForm').find($('input.vendor')).attr('id', 'addVendor');
+
+        $('.modal-body.addForm .form.originalForm').find($('label.city')).attr('for', 'addCity');
+        $('.modal-body.addForm .form.originalForm').find($('input.city')).attr('id', 'addCity');
+
+        $('.modal-body.addForm .form.originalForm').find($('label.state')).attr('for', 'addState');
+        $('.modal-body.addForm .form.originalForm').find($('select.state')).attr('id', 'addState');
+
+        $('.modal-body.addForm .form.originalForm').find($('label.amount')).attr('for', 'addAmount');
+        $('.modal-body.addForm .form.originalForm').find($('input.amount')).attr('id', 'addAmount');
+        $('.modal-body.addForm .form.originalForm').find($('select.currency')).attr('id', 'addCurrency');
+
+
+        $('.modal-body.addForm .form.originalForm').find($('label.paymentMethod')).attr('for', 'addPaymentMethod');
+        $('.modal-body.addForm .form.originalForm').find($('select.paymentMethod')).attr('id', 'addPaymentMethod');
+
+        $('.modal-body.addForm .form.originalForm').find($('label.comment')).attr('for', 'addComment');
+        $('.modal-body.addForm .form.originalForm').find($('input.comment')).attr('id', 'addComment');
+
     };
 
     handleCancelClick(){
@@ -309,9 +393,11 @@ class Model{
             data: data,
             success: response => {
                 this.dataArray = [];
-                response.data.map(item => {
-                    this.add(item.id, item.date, item.type, item.vendor, item.city, item.state, item.amount, item.currency, item.paymentMethod, item.comment)
-                });
+                if(response.data){
+                    response.data.map(item => {
+                        this.add(item.id, item.date, item.type, item.vendor, item.city, item.state, item.amount, item.currency, item.paymentMethod, item.comment)
+                    });
+                }
                 callThisFunctionAfterWeGetData()
 
             } //: is like =, when the computer read the lines and construct the object it will take care the right side first before the left side of the colon;

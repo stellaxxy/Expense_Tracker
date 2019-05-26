@@ -5,6 +5,7 @@ class SGT_template{
     return: undefined
     */
     constructor( object ){
+        this.addModal = false;
         this.displayAllExpenses = this.displayAllExpenses.bind(this);
         this.model = new Model(this.displayAllExpenses);
         this.elementConfig = object;
@@ -19,15 +20,19 @@ class SGT_template{
     */
 
     addEventHandlers(){
-        this.elementConfig.addButton.click(this.handleAdd);
+        $(window).resize(this.displayAllExpenses);
+        this.elementConfig.addButton.click(this.handleAddForm);
+        this.elementConfig.addModalButton.click(this.handleModalAdd);
         this.elementConfig.cancelButton.click(this.handleCancel);
-        this.elementConfig.deleteButton.click(this.model.handleDelete);
+        this.elementConfig.deleteButton.click(this.model.handleDeleteBtn);
+        this.elementConfig.deleteConfirmButton.click(this.model.handleDelete);
         this.elementConfig.updateButton.click(this.model.handleUpdateClick);
         this.elementConfig.updateCancelButton.click(this.model.handleCancelClick);
         this.elementConfig.updateConfirmButton.click(this.model.handleUpdateConfirmClick);
         this.elementConfig.searchType.click(this.model.handleTypeSearchClick);
         this.elementConfig.searchAll.click(this.model.handleSearchAllClick);
-
+        this.elementConfig.searchSubMenu.click(this.model.handleSubmenuClick);
+        this.elementConfig.addButtonOnSmall.click(this.model.handleAddModalClick);
     }
     /* clearInputs - take the three inputs and clear their values
     params: none
@@ -59,25 +64,52 @@ class SGT_template{
         this.elementConfig.paymentMethodInput.val('');
         this.elementConfig.commentInput.val('');
     }
+    handleModalAdd= () =>{
+        this.addModal = true;
+        this.handleAdd();
+    }
+    handleAddForm = ()=>{
+        this.addModal = false;
+        this.handleAdd();
+    };
     /* handleAdd - function to handle the add button click
     purpose: grabs values from inputs, utilizes the model's add method to save them, then clears the inputs and displays all students
     params: none
     return: undefined
     */
     handleAdd(){
-        let type = this.elementConfig.typeInput.val();
-        const date = this.elementConfig.dateInput.val();
-        let vendor = this.elementConfig.vendorInput.val();
+        let type = '';
+        let date = '';
+        let vendor = '';
+        let city = '';
+        let state = '';
+        let amount = '';
+        let currency = '';
+        let paymentMethod = '';
+        let comment = '';
 
-        let city = this.elementConfig.cityInput.val();
-
-        const state = this.elementConfig.stateInput.val();
-        let amount = this.elementConfig.amountInput.val();
-
-        const currency = this.elementConfig.currencyInput.val();
-        const paymentMethod = this.elementConfig.paymentMethodInput.val();
-        const comment = this.elementConfig.commentInput.val();
-        var id = null;
+        if(this.addModal){
+            type = $('#addExpenseType').val();
+            date = $('#addExpenseDate').val();
+            vendor = $('#addVendor').val();
+            city = $('#addCity').val();
+            state = $('#addState').val();
+            amount = $('#addAmount').val();
+            currency = $('#addCurrency').val();
+            paymentMethod = $('#addPaymentMethod').val();
+            comment = $('#addComment').val();
+        } else {
+            type = this.elementConfig.typeInput.val();
+            date = this.elementConfig.dateInput.val();
+            vendor = this.elementConfig.vendorInput.val();
+            city = this.elementConfig.cityInput.val();
+            state = this.elementConfig.stateInput.val();
+            amount = this.elementConfig.amountInput.val();
+            currency = this.elementConfig.currencyInput.val();
+            paymentMethod = this.elementConfig.paymentMethodInput.val();
+            comment = this.elementConfig.commentInput.val();
+        }
+        let id = null;
 
         const transformedObj = this.model.handleTransformCases(type, city, vendor);
         type = transformedObj.type;
@@ -102,6 +134,7 @@ class SGT_template{
                 this.model.add(id, date, type, vendor, city, state, amount, currency, paymentMethod, comment);
                 this.clearInputs();
                 this.displayAllExpenses();
+                $('#addModal').modal('hide');
 
             }).bind(this)
         });
