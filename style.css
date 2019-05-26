@@ -1,64 +1,68 @@
-.mainHeadingSmall {
-    display: none;
-}
-
 .mainHeadingBig {
     position: relative;
-}
-
-.mainHeadingBig small {
-    position: absolute;
-    right: 0;
-    color: #555555;
-    display: inline-block;
-    text-align: right;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    text-align: center;
+    font-family: fantasy;
+    font-size: 330%;
 }
 
 .container {
     position: relative;
     height: 100vh;
+    width: 100%;
 }
 
 .page-header {
-    height: 10vh;
+    #height: 8vh;
 }
-.student-add-form {
+
+.btnContainer {
+    height: 7%;
+    position: relative;
+    z-index: 1;
+}
+
+.bottomContainer {
+    height: 87vh;
+    width: 100%;
+    position: relative;
+}
+
+.expense-add-form {
     position: absolute;
     right: 0;
     font-family: arial, helvetica, sans-serif;
-    width: 30%;
+    width: 27%;
+    top: 3%;
 }
 
-.bottomStudentDiv {
+.expense-add-form h4 {
+    font-weight: bold;
+}
+
+.bottomExpenseDiv {
     height: 90vh;
+    width: 73%;
 }
 
-.bottomTable th {
-    width: 15vw;
+.tableElement {
+    width: 21%;
+}
+
+.selectAll {
+    width: 4%;
 }
 
 .bottomTable {
-    width: 70%;
+    width: 95%;
     position: relative;
     top: 3%;
     border-collapse: collapse;
 }
 
-.avgGrade {
-    background-color: #555555;
-    color: white;
-    font-weight: 400;
-    width: 14%;
-    height: 100%;
-    text-align: center;
-    display: inline-block;
-    font-size: 85%;
-    padding-top: 1%;
-    padding-bottom: 1%;
-}
-
 #displayArea td {
-    width: 14vw;
     text-align: center;
 }
 
@@ -68,23 +72,19 @@
     height: 5vh;
 }
 
-.form-span {
-    width: 10%;
-    background-color: #cccccc;
-    text-align: center;
-    border-radius: 4px;
-}
-
-.form-span i {
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
+.form-element label {
+    #width: 83px;
 }
 
 .form-input {
-    width: 90%;
+    width: 100%;
     border-radius: 4px;
 }
+
+.labelDiv {
+    flex: 0 0 83px;
+}
+
 
 .add {
     color: white;
@@ -148,12 +148,170 @@ td > button {
 
 th,
 td {
-    border-bottom: 2px solid #9E9E9E;
+    border-bottom: 0.5px solid #cccccc;
     padding-top: 1%;
     padding-bottom: 1%;
 
 }
 
+.topCell {
+    display: block;
+}
+
+.bottomCell{
+    font-size: 80%;
+}
+
+.addBtnContainer,
+.deleteBtnContainer,
+.updateBtnContainer,
+.searchBtnContainer {
+    display: inline-block;
+    position: relative;
+    top: 50%;
+    transform: translate(0, -50%);
+    margin-right: 25px;
+}
+
+.deleteBtn,
+.updateBtn,
+.searchBtn {
+    border-radius: 5px;
+    padding: 5px;
+    background-color: darkolivegreen;
+    color: white;
+}
+
+.searchBtn {
+    #background-color: darkolivegreen;
+    #color: white;
+    #padding: 5px;
+    z-index: 10000;
+}
+
+.addBtnContainer {
+    border: 1px dotted darkred;
+    border-radius: 5px;
+    padding: 5px;
+    display: none;
+}
+
+.searchBtnContainer {
+    #display: inline-block;
+    #border-radius: 5px;
+}
+
+.updateForm {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: whitesmoke;
+    display: none;
+}
+
+.updateBottomContainer {
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+}
+
+.item {
+    padding: 15px;
+    padding-top: 30px;
+    margin-left: 60px;
+    margin-right: 60px;
+}
+
+.modal .modal-dialog{
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.modal-body {
+    padding: 0;
+    height: 70%;
+    overflow-y: scroll;
+}
+
+.modal-header {
+    height: 14%;
+}
+
+.modal-content {
+    height: 100%;
+}
+
+#updateModal {
+    padding: 0 !important;
+}
+
+.modal::-webkit-scrollbar {
+    width: 0.2px;
+}
+
+.tableElement {
+    text-align: center;
+}
+
+#displayArea .checkbox {
+    margin: auto;
+}
+
+.dropdown-submenu:hover>.dropdown-menu {
+    display: inline-block;
+}
+
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu .dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -1px;
+}
+
+.dropdownMainMenu {
+    display: none;
+    list-style: none;
+}
+
+.searchType {
+    #display: none;
+}
+
+.smallScreenTableElem {
+    display: none;
+}
+
+.updateBody {
+    padding-left: 12px;
+    padding-right: 10px;
+    padding-top: 10px;
+}
+
+.updateBody::-webkit-scrollbar {
+    width: 7px;
+}
+
+.modal-title {
+    font-family: fantasy;
+    font-size: 160%;
+}
+
+.deleteConfirmModal {
+    width: 30%;
+    height: 30%;
+    top: 35%;
+    left: 35%;
+}
+.deleteConfirmMessage {
+    text-align: center;
+    position: relative;
+    top: 30%;
+}
 
 @media (max-width: 768px) {
     body > * {
@@ -167,40 +325,48 @@ td {
         width: 100%;
         padding-right: 15px;
         padding-left: 15px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
+        #display: flex;
+        #flex-direction: column;
+        #align-items: center;
+        #justify-content: center;
+        height: 100%;
     }
     .page-header {
         width: 100%;
-        height: 10%;
+        #height: 7.5%;
+        border: 0;
+        padding-top: 10px;
+        border-bottom: 1px solid #eee
     }
-    .mainHeadingBig {
-        display: none;
+    .btnContainer {
+        height: 5%;
+        font-size: 150%;
     }
-    .mainHeadingSmall {
+    .addBtnContainer {
         display: inline-block;
-        font-family: arial, helvetica, sans-serif;
-        font-weight: bold;
-        font-size: 140%;
-        width: 100%;
-        position: relative;
     }
-    .mainHeadingSmall small {
-        display: block;
-        font-size: 65%;
-        text-align: right;
-        color: #5e5e5e;
+    .deleteBtn,
+    .updateBtn,
+    .searchBtn {
+        font-size: 107%;
     }
-
-    .student-add-form {
+    .expense-add-form {
         width: 100%;
         padding-left: 15px;
         padding-right: 15px;
         position: relative;
-        height: 38%;
+        #height: 38%;
+        top: 10px;
+        display: none;
+    }
+
+    .expenseType option {
+        font-size: 12px;
+        width: 20px;
+    }
+
+    .form {
+        padding: 25px;
     }
 
     .form-element {
@@ -213,45 +379,106 @@ td {
 
     .form-input {
         border: 1px solid #cccccc;
-        #border-radius: 4px;
-        #font-size: 14px;
         padding: 6px 12px;
-        width: 90%;
+        width: 80%;
         display: inline-block;
+        margin-left: auto;
+        margin-right: 0;
     }
 
-    .form-span {
-        padding: 6px 8px;
-        #font-size: 14px;
-        font-weight: 400;
-        border: 1px solid #cccccc;
-        #border-radius: 4px;
-        background-color: #eeeeee;
-        color: #555555;
-        display: inline-block;
-        text-align: center;
-        width: 10%;
+    .amount {
+        width: 45%;
+        margin-right: 0;
     }
 
-    .bottomStudentDiv {
-        height: 52%;
-        overflow-y: scroll;
+    .currency {
+        width: 30%;
+        margin-left: 5%;
+    }
+
+    .bottomExpenseDiv {
+        height: 87.5%;
         text-align: center;
         width: 100%;
     }
 
     .bottomTable {
         position: relative;
-        top: 10px;
-        font-size: 1.5vh;
+        #top: 240px;
+        font-size: 138%;
         width: 100%;
     }
     .bottomTable thead {
         border-bottom: 1px solid #555555;
     }
     .tableElement {
-        width: 33.33%;
+        #width: 33.33%;
         display: table-cell;
         text-align: center;
+    }
+    .smallScreenTableElem {
+        display: none;
+    }
+    .addModal {
+        height: 90%;
+        width: 90%;
+        top: 5%;
+        left: 5%;
+    }
+    .dropdown-menu li {
+        font-size: 20px;
+    }
+    .deleteConfirmModal {
+        width: 70%;
+        height: 50%;
+        top: 25%;
+        left: 15%;
+    }
+}
+
+@media (max-width: 576px) {
+    .addBtnContainer span {
+        font-size: 70%;
+    }
+    .deleteBtn,
+    .updateBtn,
+    .searchBtn {
+        font-size: 70%;
+    }
+    .addBtnContainer,
+    .deleteBtnContainer,
+    .updateBtnContainer,
+    .searchBtnContainer {
+        margin-right: 0;
+    }
+    .addBtnContainer {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+    .btnContainer {
+        text-align: center;
+    }
+    .smallScreenTableElem {
+        display: table-cell;
+    }
+    .bigScreenTableElem {
+        display: none;
+    }
+    .smallDetailType {
+        font-weight: bold;
+    }
+    .smallDetailDate,
+    .smallDetailLocation {
+        font-size: 90%;
+    }
+    .selectAll {
+        width: 8%;
+    }
+    .updateForm {
+        width: 90%;
+        height: 80%;
+    }
+    .dropdown-menu li {
+        font-size: 15px;
     }
 }
