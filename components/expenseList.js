@@ -69,7 +69,6 @@ class ExpenseList{
     return: (jquery dom element) the row that contains the student dom elements
     */
     render() {
-        console.log('screen size:', $(window).width());
         var row = $('<tr>');
 
         var amountColumn = $('<td>');
