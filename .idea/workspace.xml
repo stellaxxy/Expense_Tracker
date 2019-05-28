@@ -25,7 +25,7 @@
         <counts>
           <entry key="config" value="1" />
           <entry key="css" value="11" />
-          <entry key="gitignore" value="3" />
+          <entry key="gitignore" value="5" />
           <entry key="html" value="9" />
           <entry key="js" value="39" />
           <entry key="md" value="3" />
@@ -39,13 +39,13 @@
           <entry key="JavaScript" value="39" />
           <entry key="Markdown" value="3" />
           <entry key="PHP" value="35" />
-          <entry key="PLAIN_TEXT" value="4" />
+          <entry key="PLAIN_TEXT" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="css" value="3193" />
-          <entry key="gitignore" value="20" />
+          <entry key="gitignore" value="34" />
           <entry key="html" value="3801" />
           <entry key="js" value="12864" />
           <entry key="php" value="4447" />
@@ -57,7 +57,7 @@
           <entry key="HTML" value="3801" />
           <entry key="JavaScript" value="12864" />
           <entry key="PHP" value="4445" />
-          <entry key="PLAIN_TEXT" value="20" />
+          <entry key="PLAIN_TEXT" value="34" />
           <entry key="SQL" value="2" />
         </counts>
       </usages-collector>
@@ -68,11 +68,29 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/components/model.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="306">
               <caret line="255" column="69" selection-start-line="255" selection-start-column="69" selection-end-line="255" selection-end-column="69" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="1" column="5" lean-forward="true" selection-start-line="1" selection-start-column="5" selection-end-line="1" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="5" lean-forward="true" selection-start-column="5" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -166,7 +184,6 @@
         <option value="$PROJECT_DIR$/components/studentrecord.js" />
         <option value="$PROJECT_DIR$/server/mysqlcredentials.php" />
         <option value="$PROJECT_DIR$/server/mysqlcredentials.php.config" />
-        <option value="$PROJECT_DIR$/server/.gitignore" />
         <option value="$PROJECT_DIR$/server/dummydata/dummyData.js" />
         <option value="$PROJECT_DIR$/server/dummydata/dummyData.php" />
         <option value="$PROJECT_DIR$/server/deleteExpense.php" />
@@ -179,6 +196,8 @@
         <option value="$PROJECT_DIR$/style.css" />
         <option value="$PROJECT_DIR$/components/expenseList.js" />
         <option value="$PROJECT_DIR$/components/model.js" />
+        <option value="$PROJECT_DIR$/server/.gitignore" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -189,7 +208,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="2569" />
+    <option name="x" value="2572" />
+    <option name="y" value="8" />
     <option name="width" value="1981" />
     <option name="height" value="1383" />
   </component>
@@ -258,15 +278,15 @@
       <workItem from="1558233746456" duration="1223000" />
       <workItem from="1558485500304" duration="10540000" />
       <workItem from="1558551098467" duration="77101000" />
-      <workItem from="1559026954776" duration="2874000" />
+      <workItem from="1559026954776" duration="3267000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="237423000" />
+    <option name="totallyTimeSpent" value="237816000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="2291" y="0" width="1132" height="790" extended-state="0" />
+    <frame x="2293" y="5" width="1132" height="790" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49710146" visible="true" weight="0.1378026" />
@@ -355,13 +375,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="20" lean-forward="true" selection-start-column="20" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="433">
@@ -404,6 +417,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="255" column="69" selection-start-line="255" selection-start-column="69" selection-end-line="255" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="5" lean-forward="true" selection-start-line="1" selection-start-column="5" selection-end-line="1" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="5" lean-forward="true" selection-start-column="5" selection-end-column="5" />
         </state>
       </provider>
     </entry>
