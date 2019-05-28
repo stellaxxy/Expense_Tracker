@@ -207,7 +207,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="x" value="2572" />
     <option name="y" value="8" />
     <option name="width" value="1981" />
@@ -225,16 +225,6 @@
             <path>
               <item name="expense_tracker" type="b2602c69:ProjectViewProjectNode" />
               <item name="expense_tracker" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="expense_tracker" type="b2602c69:ProjectViewProjectNode" />
-              <item name="expense_tracker" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="expense_tracker" type="b2602c69:ProjectViewProjectNode" />
-              <item name="expense_tracker" type="462c0819:PsiDirectoryNode" />
-              <item name="server" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -278,16 +268,15 @@
       <workItem from="1558233746456" duration="1223000" />
       <workItem from="1558485500304" duration="10540000" />
       <workItem from="1558551098467" duration="77101000" />
-      <workItem from="1559026954776" duration="3267000" />
+      <workItem from="1559026954776" duration="3871000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="237816000" />
+    <option name="totallyTimeSpent" value="238420000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="2293" y="5" width="1132" height="790" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49710146" visible="true" weight="0.1378026" />
       <window_info id="Favorites" order="1" sideWeight="0.5028986" side_tool="true" weight="0.1532787" />
