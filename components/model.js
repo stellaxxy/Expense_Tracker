@@ -6,7 +6,6 @@ class Model{
     */
     constructor(displayExpense=()=>{}){
         this.dataArray = [];
-        this.selectedDataArray = [];
         this.id = 0;
         this.displayExpenses = displayExpense;
 
@@ -250,11 +249,11 @@ class Model{
             data: {id, type, date, vendor, city, state, amount, currency, paymentMethod, comment},
             dataType: 'json',
             success: response => {
-                $('.modal-body').empty();
-                $('.modal-footer').empty();
+                $('.modal-body.updateBody').empty();
+                $('.modal-footer.updateBottomContainer').empty();
                 if(response.success){
                     const successMessage = $('<div>').text('Successfully Updated');
-                    successMessage.appendTo($('.modal-body'));
+                    successMessage.appendTo($('.modal-body.updateBody'));
 
                     this.updateDataArray(id, date, type, vendor, city, state, amount, currency, paymentMethod, comment);
                     this.displayExpenses();
@@ -264,11 +263,11 @@ class Model{
                         error = error + response.error[index];
                     }
                     const errorMessage = $('<div>').text(error);
-                    errorMessage.appendTo($('.modal-body'));
+                    errorMessage.appendTo($('.modal-body.updateBody'));
                 }
                 const closeBtn = $('<button>').text('CLOSE').attr('data-dismiss', 'modal');
                 //closeBtn.click(this.handlePutBackUpdateBtn);
-                closeBtn.appendTo($('.modal-footer'));
+                closeBtn.appendTo($('.modal-footer.updateBottomContainer'));
 
             }
         });
