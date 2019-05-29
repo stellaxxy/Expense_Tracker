@@ -244,7 +244,7 @@ class Model{
         const comment = $('#updateComment').val();
 
         $.ajax({
-            url: 'http://localhost/expense_tracker/server/updateExpense.php',
+            url: 'http://dev.stellaxyh.com/expensetracker/server/updateExpense.php',
             method: 'POST',
             data: {id, type, date, vendor, city, state, amount, currency, paymentMethod, comment},
             dataType: 'json',
@@ -386,7 +386,7 @@ class Model{
             data['searchValue'] = value;
         }
         $.ajax({
-            url: 'http://localhost/expense_tracker/server/getAllExpenses.php',
+            url: 'http://dev.stellaxyh.com/expensetracker/server/getAllExpenses.php',
             method: 'POST',
             dataType: 'json',
             data: data,
