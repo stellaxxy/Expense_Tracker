@@ -118,7 +118,7 @@ class SGT_template{
 
         $('.errorMessage').show();
         $.ajax({
-            url: 'http://localhost/expense_tracker/server/createExpense.php',
+            url: 'http://dev.stellaxyh.com/expensetracker/server/createExpense.php',
             method: 'POST',
             data: {type, date, vendor, city, state, amount, currency, paymentMethod, comment},
             dataType: 'json',

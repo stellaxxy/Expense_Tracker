@@ -126,7 +126,7 @@ class Model{
         $('.deleteConfirmModal').show();
 
         $.ajax({
-            url: 'http://localhost/expense_tracker/server/deleteExpense.php',
+            url: 'http://dev.stellaxyh.com/expensetracker/server/deleteExpense.php',
             method: 'POST',
             data: {expense_idArr: idArr},
             dataType: 'json',
@@ -207,7 +207,7 @@ class Model{
         $('.modal-body.updateBody .form.originalForm').find($('input.comment')).attr('id', 'updateComment');
 
         $.ajax({
-            url: 'http://localhost/expense_tracker/server/getAllExpenses.php',
+            url: 'http://dev.stellaxyh.com/expensetracker/server/getAllExpenses.php',
             method: 'POST',
             data: {expense_idArr: checkedValue},
             dataType: 'json',
