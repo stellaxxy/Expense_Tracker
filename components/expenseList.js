@@ -11,15 +11,6 @@ class ExpenseList{
         (function) deleteCallback - the removal function from the model to call when this student wants to be removed from the model's list
     return: undefined (don't return undefined, it will screw it up a constructor, don't put a return)
     */
-    /*
-    this function has been written for you to see best practices and proper
-    compartmentalization of data, as well as correct binding.  It also
-    uses a default parameter on the deleteCallback function, but don't worry about that
-    for your version
-    You do not need to modify any more of THIS constructor, but other constructors
-    will not be built out.
-    Please make sure you understand what is going on and could recreate it via notes rather than direct copying!
-    */
     constructor(id, date, type, vendor, city, state, amount, currency, paymentMethod, comment){
         this.data = {
             id, date, type, vendor, city, state, amount: parseFloat(amount).toFixed(2), currency, paymentMethod, comment
@@ -35,24 +26,7 @@ class ExpenseList{
         };
         this.handleDelete = this.handleDelete.bind( this );
     }
-
-    /* getData - get all the student data as a simple object
-    params: none
-    return: (object) an object with the following data
-        (number): id
-        (string): name
-        (string): course
-        (number): grade
-    */
-    getData(){
-        var studentData = {
-            id: this.data.id,
-            name: this.data.name,
-            course: this.data.course,
-            grade: this.data.grade
-        };
-        return studentData;
-    }
+    
     /* render - create and return a table row (TR) with 4 table cells (TD) in them:
         name : the student's name
         course : the student's course
