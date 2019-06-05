@@ -254,9 +254,8 @@ class Model{
                 if(response.success){
                     const successMessage = $('<div>').text('Successfully Updated');
                     successMessage.appendTo($('.modal-body.updateBody'));
-
                     this.updateDataArray(id, date, type, vendor, city, state, amount, currency, paymentMethod, comment);
-                    this.displayExpenses();
+
                 } else {
                     let error = '';
                     for(let index = 0; index < response.error.length; index++){
@@ -265,8 +264,8 @@ class Model{
                     const errorMessage = $('<div>').text(error);
                     errorMessage.appendTo($('.modal-body.updateBody'));
                 }
+                this.displayExpenses();
                 const closeBtn = $('<button>').text('CLOSE').attr('data-dismiss', 'modal');
-                //closeBtn.click(this.handlePutBackUpdateBtn);
                 closeBtn.appendTo($('.modal-footer.updateBottomContainer'));
 
             }

@@ -98,7 +98,5 @@ class ExpenseList{
         this.deleteCallback(this);
 
         return this.domElements.row.remove();
-
-
     }
 }
