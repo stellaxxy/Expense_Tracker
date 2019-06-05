@@ -26,24 +26,7 @@ class ExpenseList{
         };
         this.handleDelete = this.handleDelete.bind( this );
     }
-
-    /* getData - get all the student data as a simple object
-    params: none
-    return: (object) an object with the following data
-        (number): id
-        (string): name
-        (string): course
-        (number): grade
-    */
-    getData(){
-        var studentData = {
-            id: this.data.id,
-            name: this.data.name,
-            course: this.data.course,
-            grade: this.data.grade
-        };
-        return studentData;
-    }
+    
     /* render - create and return a table row (TR) with 4 table cells (TD) in them:
         name : the student's name
         course : the student's course
@@ -115,7 +98,5 @@ class ExpenseList{
         this.deleteCallback(this);
 
         return this.domElements.row.remove();
-
-
     }
 }
